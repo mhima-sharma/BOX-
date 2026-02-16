@@ -8,89 +8,203 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })
 export class CreateproductComponent {
+
   productForm: FormGroup;
+
   selectedFiles: File[] = [];
+
   products: any[] = [];
 
-  private baseUrl = window.location.hostname === 'localhost'
-    ? 'http://localhost:3000/api/products'
-    : 'https://backend-plant-website.vercel.app/api/products';
+  // ✅ Category list (static for now)
+  categories: string[] = [
+    'Electronics',
+    'Fashion',
+    'Shoes',
+    'Furniture',
+    'Books',
+    'Beauty',
+    'Other'
+  ];
+
+  private baseUrl =
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:3000/api/products'
+      : 'https://backend-plant-website.vercel.app/api/products';
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private productService: ProductService
   ) {
+
+    // ✅ added category here
     this.productForm = this.fb.group({
+
       title: ['', Validators.required],
-      quantity: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      price: ['', [Validators.required, Validators.pattern(/^[0-9.]+$/)]],
+
+      category: ['', Validators.required],
+
+      quantity: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9]+$/)
+      ]],
+
+      price: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9.]+$/)
+      ]],
+
       description: ['', Validators.required]
+
     });
+
   }
 
+
+  // ✅ File select
   onFileChange(event: any): void {
+
     const files = event.target.files;
+
     if (files && files.length > 0) {
+
       this.selectedFiles = Array.from(files);
+
       console.log('Selected files:', this.selectedFiles);
+
     }
+
   }
 
+
+  // ✅ Submit form
   submitForm(): void {
+
     if (this.productForm.invalid || this.selectedFiles.length === 0) {
-      alert('Please fill all required fields and select at least one image.');
+
+      alert('Please fill all fields');
+
       return;
+
     }
+
 
     const token = localStorage.getItem('token');
+
     if (!token) {
-      alert('You must be logged in to upload products.');
+
+      alert('Login required');
+
       return;
+
     }
 
+
     const formData = new FormData();
-    formData.append('title', this.productForm.get('title')?.value);
-    formData.append('quantity', this.productForm.get('quantity')?.value);
-    formData.append('price', this.productForm.get('price')?.value);
-    formData.append('description', this.productForm.get('description')?.value);
+
+
+    // ✅ added category here
+    formData.append(
+      'title',
+      this.productForm.get('title')?.value
+    );
+
+
+    formData.append(
+      'category',
+      this.productForm.get('category')?.value
+    );
+
+
+    formData.append(
+      'quantity',
+      this.productForm.get('quantity')?.value
+    );
+
+
+    formData.append(
+      'price',
+      this.productForm.get('price')?.value
+    );
+
+
+    formData.append(
+      'description',
+      this.productForm.get('description')?.value
+    );
+
 
     this.selectedFiles.forEach(file => {
+
       formData.append('images', file);
+
     });
+
 
     const headers = new HttpHeaders({
+
       Authorization: `Bearer ${token}`
+
     });
 
-    this.http.post(this.baseUrl, formData, { headers }).subscribe({
-      next: (res) => {
-        console.log('✅ Product added successfully:', res);
-        alert('Product uploaded ✅');
-        this.productForm.reset();
-        this.selectedFiles = [];
-        this.fetchProducts(); // optional refresh
-      },
-      error: (err) => {
-        console.error('❌ Error uploading product:', err);
-        alert(err.error?.message || 'Upload failed. Please login again.');
-      }
-    });
+
+    this.http.post(this.baseUrl, formData, { headers })
+
+      .subscribe({
+
+        next: (res) => {
+
+          console.log(res);
+
+          alert('Product uploaded successfully');
+
+          this.productForm.reset();
+
+          this.selectedFiles = [];
+
+          this.fetchProducts();
+
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+          alert(err.error?.message || 'Upload failed');
+
+        }
+
+      });
+
   }
 
+
+  // ✅ Fetch products
   fetchProducts(): void {
-    this.productService.getAllProducts().subscribe({
-      next: (res) => {
-        this.products = res;
-      },
-      error: (err) => {
-        console.error('Error fetching products:', err);
-      }
-    });
+
+    this.productService.getAllProducts()
+
+      .subscribe({
+
+        next: (res) => {
+
+          this.products = res;
+
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+        }
+
+      });
+
   }
+
 }
