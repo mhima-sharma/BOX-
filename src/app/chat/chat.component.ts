@@ -85,7 +85,7 @@ console.log('currentUser',this.currentUser)
   }
 
   getUsers() {
-    this.http.get<any[]>('http://localhost:3000/api/users').subscribe(data => {
+    this.http.get<any[]>('https://boxe-backend.vercel.app/api/users').subscribe(data => {
       this.users = data.filter(user => user.name !== this.currentUser);
       if (this.users.length > 0) {
         this.selectUser(this.users[0], 'one_to_one');
@@ -94,7 +94,7 @@ console.log('currentUser',this.currentUser)
   }
 
   getGroups() {
-    this.http.get<any[]>('http://localhost:3000/api/${this.currentUser}').subscribe({
+    this.http.get<any[]>('https://boxe-backend.vercel.app/api/${this.currentUser}').subscribe({
       next: res => (this.groups = res),
       error: err => console.error('Error fetching groups:', err),
     });
@@ -164,7 +164,7 @@ console.log("hiiiiii")
     msg.message = trimmed;
 
     // Send update to backend
-    this.http.patch('http://localhost:3000/api/messages/${msg.id}', { message: trimmed }).subscribe({
+    this.http.patch('https://boxe-backend.vercel.app/api/messages/${msg.id}', { message: trimmed }).subscribe({
       next: () =>  console.log("DB updated"),
       error: err => console.error('Error updating message:', err),
     });

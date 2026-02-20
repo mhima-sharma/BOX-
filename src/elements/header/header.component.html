@@ -1,86 +1,76 @@
-<!-- Top Green Bar -->
-<div class="bg-gradient-to-r from-lime-300 to-green-800 fixed w-full z-50 text-white text-center text-sm md:text-base font-semibold py-1">
-  <p>"Work that speaks for itself."</p>
-</div>
+<!-- TOP BAR -->
+<div class="w-full text-[10px] sm:text-[11px] bg-[#E6D2C4] text-[#3E2F2B]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2 flex justify-between items-center">
 
-<!-- Navbar -->
-<div class="fixed top-[30px] w-full bg-white shadow z-40">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
-
-    <!-- Logo -->
-    <a routerLink="/" class="flex items-center gap-2">
-      <img
-        src="https://res.cloudinary.com/dyao79iwv/image/upload/v1754470529/logo_little-leafy_zaeroc.png"
-        alt="Little Leafy Logo"
-        class="h-10 md:h-14 w-auto object-contain"
-      />
-    </a>
-
-    <!-- Navigation Links -->
-    <div class="hidden md:flex gap-5 text-green-700 text-sm font-medium items-center">
-      <a routerLink="/show" class="hover:text-lime-600 transition-colors" style="color: green !important;">Home</a>
-      <a routerLink="/about" class="hover:text-lime-600 transition-colors" style="color: green !important;">About us</a>
-      <a routerLink="/contact" class="hover:text-lime-600 transition-colors" style="color: green !important;">Contact us</a>
-      <a routerLink="/store" class="hover:text-lime-600 transition-colors" style="color: green !important;">plants</a>
-      <a routerLink="/accessories" (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer" style="color: green !important;">Plant Accessories</a>
-      
-      <!-- Auth Links -->
-      <div>
-        <!-- Sign Up -->
-        <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
-          class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition" style="color: green !important;">
-          Sign Up
-          <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
-            alt="tap here"
-            class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
-        </a> 
-
-        <!-- Logout -->
-        <a *ngIf="isLoggedIn" (click)="openLogoutPopup()"
-          class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer"
-          style="color: green !important; text-decoration: none !important;">
-          Logout
-        </a>
-      </div>
+    <!-- LEFT SOCIAL -->
+    <div class="flex gap-3 sm:gap-4 opacity-80">
+      <i class="fab fa-instagram cursor-pointer hover:text-[#C6A76E] transition"></i>
+      <i class="fab fa-facebook cursor-pointer hover:text-[#C6A76E] transition"></i>
+      <i class="fab fa-twitter cursor-pointer hover:text-[#C6A76E] transition"></i>
     </div>
 
-    <!-- Cart + Profile Icons -->
-    <div class="flex items-center gap-x-3 text-green-700">
-      
-      <!-- Cart Icon -->
-      <div class="relative cursor-pointer" (click)="openCart()">
-        <i class="fas fa-shopping-bag text-xl hover:text-lime-600 transition-colors"></i>
-        <span
-          class="absolute -top-2 -right-2 bg-green-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-          {{ cartCount > 0 ? cartCount : 0 }}
-        </span>
-      </div>
-
-      <!-- User Profile Icon -->
-      <div class="relative cursor-pointer" routerLink="/profile">
-        <i class="fas fa-user-circle text-2xl hover:text-lime-600 transition-colors"></i>
-      </div>
-
+    <!-- RIGHT LINKS -->
+    <div class="hidden sm:flex gap-6 tracking-[0.25em] uppercase text-[10px]">
+      <a routerLink="/intro" class="hover:text-[#C6A76E] transition">About</a>
+      <a routerLink="/contact" class="hover:text-[#C6A76E] transition">Contact</a>
     </div>
 
-  </nav>
-</div>
-
-<!-- Logout Modal -->
-<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-  <div class="bg-white rounded-xl p-6 shadow-lg w-80 text-center">
-    <h2 class="text-lg font-semibold mb-4 text-gray-800">
-      Are you sure you want to logout?
-    </h2>
-    <div class="flex justify-center gap-4">
-      <button (click)="confirmLogout()"
-        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-        Yes
-      </button>
-      <button (click)="closeLogoutPopup()"
-        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded">
-        No
-      </button>
-    </div>
   </div>
 </div>
+
+
+
+<!-- MAIN HEADER -->
+<header class="w-full bg-[#D8BFAE] border-b border-[#EADFD6] relative">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
+
+    <!-- MOBILE MENU BUTTON -->
+    <button 
+      class="sm:hidden text-[#3E2F2B] text-xl"
+      (click)="isMenuOpen = !isMenuOpen">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- LEFT DESKTOP NAV -->
+    <div class="hidden sm:flex gap-10 text-xs tracking-[0.35em] uppercase text-[#3E2F2B]">
+      <a routerLink="/show" class="hover:text-[#C6A76E] transition duration-300">Home</a>
+      <a routerLink="/store" class="hover:text-[#C6A76E] transition duration-300">Shop</a>
+    </div>
+
+    <!-- LOGO -->
+    <div class="absolute left-1/2 transform -translate-x-1/2 sm:static sm:transform-none text-center">
+      <a routerLink="/"
+         class="text-2xl sm:text-3xl tracking-[0.5em] text-[#F6F1EB] font-[Playfair_Display]">
+        BOXÉ
+      </a>
+    </div>
+
+    <!-- RIGHT ICONS -->
+    <div class="flex items-center gap-5 sm:gap-8 text-sm text-[#3E2F2B]">
+      <!-- <i class="fas fa-search cursor-pointer hover:text-[#C6A76E] transition"></i> -->
+  <a routerLink="/show-cart">
+  <i class="fas fa-shopping-bag cursor-pointer hover:text-[#C6A76E] transition"></i>
+</a>
+
+<i 
+  class="fas fa-user cursor-pointer hover:text-[#C6A76E] transition"
+  routerLink="/user-login">
+</i>
+    </div>
+
+  </div>
+
+  <!-- MOBILE DROPDOWN MENU -->
+  <div 
+    *ngIf="isMenuOpen" 
+    class="sm:hidden bg-[#EADFD6] border-t border-[#D8BFAE] px-6 py-4 space-y-4 text-sm tracking-[0.3em] uppercase text-[#3E2F2B]">
+
+    <a routerLink="/show" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">Home</a>
+    <a routerLink="/store" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">Shop</a>
+    <a routerLink="/intro" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">About</a>
+    <a routerLink="/contact" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">Contact</a>
+
+  </div>
+
+</header>

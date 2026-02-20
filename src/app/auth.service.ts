@@ -1,100 +1,114 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError, catchError, tap } from 'rxjs';
+
+// ---------------- TYPES ----------------
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: 'user' | 'admin';
+}
+
+interface AuthResponse {
+  token: string;
+  user?: User;
+  admin?: User;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = '';
+  private baseUrl = 'https://boxe-backend.vercel.app/api/auth';
   private token$ = new BehaviorSubject<string | null>(null);
 
   constructor(private http: HttpClient) {
-    const isLocalhost = window.location.hostname === 'localhost';
-    this.baseUrl = isLocalhost
-      ? 'http://localhost:3000/api/auth'
-      : 'https://backend-plant-website.vercel.app/api/auth';
-
-    // ✅ Load token from localStorage on app load (if exists)
+    // Load token from localStorage on app start
     const savedToken = localStorage.getItem('token');
-    if (savedToken) {
-      this.token$.next(savedToken);
-    }
+    if (savedToken) this.token$.next(savedToken);
   }
 
-  // USER SIGNUP
-  signup(data: { name: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signup`, data);
+  // ---------------- PUBLIC METHODS ----------------
+
+  signup(data: { name: string; email: string; password: string }): Observable<AuthResponse> {
+    return this.post<AuthResponse>('/signup', data);
   }
 
-  // USER LOGIN
-  login(data: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, data).pipe(
-      tap((res: any) => {
-        this.token$.next(res.token);
-        localStorage.setItem('token', res.token); // ✅ save token
-        localStorage.setItem('user', JSON.stringify({
-          id: res.user.id,
-          name: res.user.name,
-          email: res.user.email,
-          role: 'user'
-        }));
+  login(data: { email: string; password: string }): Observable<AuthResponse> {
+    return this.post<AuthResponse>('/login', data).pipe(
+      tap(res => {
+        if (res.token && res.user) this.setSession(res.token, res.user, 'user');
       })
     );
   }
 
-  // ADMIN SIGNUP
-  signupAdmin(data: { name: string; email: string; password: string }) {
-    return this.http.post(`${this.baseUrl}/admin/signup`, data);
+  signupAdmin(data: { name: string; email: string; password: string }): Observable<AuthResponse> {
+    return this.post<AuthResponse>('/admin/signup', data);
   }
 
-  // ADMIN LOGIN
-  loginAdmin(data: { email: string; password: string }) {
-    return this.http.post(`${this.baseUrl}/admin/login`, data).pipe(
-      tap((res: any) => {
-        this.token$.next(res.token);
-        localStorage.setItem('token', res.token); // ✅ save token
-        localStorage.setItem('user', JSON.stringify({
-          id: res.admin.id,
-          name: res.admin.name,
-          email: res.admin.email,
-          role: 'admin'
-        }));
+  loginAdmin(data: { email: string; password: string }): Observable<AuthResponse> {
+    return this.post<AuthResponse>('/admin/login', data).pipe(
+      tap(res => {
+        if (res.token && res.admin) this.setSession(res.token, res.admin, 'admin');
       })
     );
   }
 
-  // ✅ GET token observable (for interceptor or guards)
-  getToken(): Observable<string | null> {
-    return this.token$.asObservable();
+  logout(): void {
+    this.token$.next(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
-  // ✅ GET raw token (for immediate header injection)
-  getRawToken(): string | null {
-    return this.token$.getValue();
-  }
-
-  // ✅ Get user ID from localStorage
-  getUserId(): number | null {
-    const userData = JSON.parse(localStorage.getItem('user') || 'null');
-    return userData ? userData.id : null;
-  }
-
-  // ✅ Get user role
-  getUserRole(): 'user' | 'admin' | null {
-    const userData = JSON.parse(localStorage.getItem('user') || 'null');
-    return userData ? userData.role : null;
-  }
-
-  // ✅ Check if user is authenticated
   isAuthenticated(): boolean {
     return !!this.token$.getValue();
   }
 
-  // ✅ Logout method
-  logout(): void {
-    this.token$.next(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+  getToken(): Observable<string | null> {
+    return this.token$.asObservable();
+  }
+
+  getRawToken(): string | null {
+    return this.token$.getValue();
+  }
+
+  getUser(): User | null {
+    return JSON.parse(localStorage.getItem('user') || 'null');
+  }
+
+  getUserId(): number | null {
+    const user = this.getUser();
+    return user ? user.id : null;
+  }
+
+  getUserRole(): 'user' | 'admin' | null {
+    const user = this.getUser();
+    return user ? user.role : null;
+  }
+
+  // ---------------- PRIVATE METHODS ----------------
+
+  private setSession(token: string, user: User, role: 'user' | 'admin') {
+    this.token$.next(token);
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify({ ...user, role }));
+  }
+
+  private getHttpOptions(): { headers: HttpHeaders } {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: this.getRawToken() ? `Bearer ${this.getRawToken()}` : ''
+    });
+    return { headers };
+  }
+
+  private post<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}${endpoint}`, data, this.getHttpOptions()).pipe(
+      catchError(err => {
+        console.error(`❌ HTTP POST ${endpoint} failed:`, err);
+        return throwError(() => err);
+      })
+    );
   }
 }

@@ -1,74 +1,112 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-100 to-green-300 p-4">
-  <div class="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 relative overflow-hidden">
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F5EFE6] via-[#EFE6D8] to-[#E8DDC8] px-4 py-10">
 
-    <!-- Welcome Plant GIF -->
-    <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJlr9qL4ZVmDhGOhj8nQobSoR55r6j_foAlQ&s"
-      alt="Welcome"
-      class="w-24 h-24 mx-auto mb-4 rounded-full shadow-lg border-4 border-white bg-green-50 object-cover" />
+  <div class="w-full max-w-md bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8 sm:p-10 border border-[#E6D7C3]">
 
-    <!-- Title -->
-    <h2 class="text-3xl font-bold text-center text-green-800 mb-6">Create Your Leafy Account 🌱</h2>
+    <!-- Brand Mark -->
+    <div class="flex justify-center mb-6">
+      <div class="w-20 h-20 rounded-full flex items-center justify-center bg-[#FAF7F2] border border-[#D6C2A8] shadow-sm">
+        <span class="text-2xl font-serif text-[#3E2C23] tracking-wide">B</span>
+      </div>
+    </div>
+
+    <!-- Heading -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl sm:text-4xl font-serif tracking-wide text-[#3E2C23]">
+        Create Your Account
+      </h2>
+      <p class="text-sm text-[#7A6A58] mt-2 tracking-wide">
+        Join the refined world of BOXÉ plants
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-3 mb-8">
+      <div class="flex-1 h-px bg-[#E5D6C3]"></div>
+      <span class="text-xs tracking-widest text-[#B89B72] uppercase">
+        Register
+      </span>
+      <div class="flex-1 h-px bg-[#E5D6C3]"></div>
+    </div>
 
     <!-- Form -->
-    <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="space-y-4">
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="space-y-6">
 
       <!-- Full Name -->
       <div>
-        <label class="block text-green-800 mb-1" for="name">Full Name</label>
+        <label for="name" class="block text-sm tracking-wide text-[#5E4A3B] mb-2">
+          Full Name
+        </label>
         <input
           type="text"
           id="name"
           formControlName="name"
           placeholder="John Leaflover"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+          class="w-full px-4 py-3 rounded-xl border border-[#E0D2C0] bg-[#FAF7F2] focus:border-[#B89B72] focus:ring-1 focus:ring-[#C6A87D] outline-none transition duration-300 text-[#3E2C23]" />
       </div>
 
       <!-- Email -->
       <div>
-        <label class="block text-green-800 mb-1" for="email">Email</label>
+        <label for="email" class="block text-sm tracking-wide text-[#5E4A3B] mb-2">
+          Email Address
+        </label>
         <input
           type="email"
           id="email"
           formControlName="email"
-          placeholder="you@littleleafy.com"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+          placeholder="you@boxeplants.com"
+          class="w-full px-4 py-3 rounded-xl border border-[#E0D2C0] bg-[#FAF7F2] focus:border-[#B89B72] focus:ring-1 focus:ring-[#C6A87D] outline-none transition duration-300 text-[#3E2C23]" />
       </div>
 
       <!-- Password -->
       <div class="relative">
-        <label class="block text-green-800 mb-1" for="password">Password</label>
+        <label for="password" class="block text-sm tracking-wide text-[#5E4A3B] mb-2">
+          Password
+        </label>
         <input
           [type]="showPassword ? 'text' : 'password'"
           id="password"
           formControlName="password"
           placeholder="••••••••"
-          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
-        <i
-          class="fas absolute right-3 top-[38px] text-gray-500 cursor-pointer"
-          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
-          (click)="togglePassword()"
-        ></i>
+          class="w-full px-4 py-3 pr-12 rounded-xl border border-[#E0D2C0] bg-[#FAF7F2] focus:border-[#B89B72] focus:ring-1 focus:ring-[#C6A87D] outline-none transition duration-300 text-[#3E2C23]" />
+
+        <button
+          type="button"
+          class="absolute right-3 top-[42px] text-[#8A7763] hover:text-[#3E2C23] transition"
+          (click)="togglePassword()">
+          <i
+            class="fas"
+            [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'">
+          </i>
+        </button>
       </div>
 
       <!-- Confirm Password -->
       <div class="relative">
-        <label class="block text-green-800 mb-1" for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword" class="block text-sm tracking-wide text-[#5E4A3B] mb-2">
+          Confirm Password
+        </label>
         <input
           [type]="showConfirmPassword ? 'text' : 'password'"
           id="confirmPassword"
           formControlName="confirmPassword"
           placeholder="••••••••"
-          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
-        <i
-          class="fas absolute right-3 top-[38px] text-gray-500 cursor-pointer"
-          [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
-          (click)="toggleConfirmPassword()"
-        ></i>
+          class="w-full px-4 py-3 pr-12 rounded-xl border border-[#E0D2C0] bg-[#FAF7F2] focus:border-[#B89B72] focus:ring-1 focus:ring-[#C6A87D] outline-none transition duration-300 text-[#3E2C23]" />
+
+        <button
+          type="button"
+          class="absolute right-3 top-[42px] text-[#8A7763] hover:text-[#3E2C23] transition"
+          (click)="toggleConfirmPassword()">
+          <i
+            class="fas"
+            [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'">
+          </i>
+        </button>
       </div>
 
       <!-- Error Message -->
-      <div class="text-red-500 text-sm" *ngIf="errorMessage">
+      <div
+        class="text-sm text-[#A94442] bg-[#F8EDEB] border border-[#E6CFCB] px-4 py-2 rounded-lg"
+        *ngIf="errorMessage">
         {{ errorMessage }}
       </div>
 
@@ -76,24 +114,20 @@
       <button
         type="submit"
         [disabled]="signupForm.invalid"
-        class="w-full bg-green-600 text-white py-2 rounded-full hover:bg-green-700 transition duration-300 text-lg">
-        Sign Up
+        class="w-full bg-[#3E2C23] hover:bg-[#2C1F18] text-white py-3 rounded-full text-sm tracking-widest uppercase transition-all duration-300 shadow-md disabled:opacity-40 disabled:cursor-not-allowed">
+        Create Account
       </button>
 
       <!-- Login Link -->
-      <p class="text-center text-sm text-gray-500 mt-4">
-        Already have an account?
-        <a routerLink="/user-login" class="text-green-700 hover:underline font-medium">Login</a>
+      <p class="text-center text-sm text-[#7A6A58] mt-6">
+        Already registered?
+        <a routerLink="/user-login"
+           class="text-[#B89B72] font-medium hover:underline transition">
+          Sign In
+        </a>
       </p>
-    </form>
 
-    <!-- Decorative Plant GIF -->
-    <div class="absolute -bottom-12 -right-12 opacity-30 pointer-events-none">
-      <img
-        src="https://i.redd.it/5ewdyosppt791.gif"
-        alt="Decorative Plant GIF"
-        class="w-32 h-32" />
-    </div>
+    </form>
 
   </div>
 </div>

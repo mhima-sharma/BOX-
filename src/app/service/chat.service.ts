@@ -15,9 +15,11 @@ export class ChatService {
 
   constructor(private http: HttpClient) {
     const isLocalhost = window.location.hostname === 'localhost';
-    this.apiUrl = isLocalhost
-      ? 'http://localhost:3000/api'
-      : 'https://backend-plant-website.vercel.app/api';
+    // this.apiUrl = isLocalhost
+    //   ? 'http://localhost:3000/api'
+    //   : 'https://backend-plant-website.vercel.app/api';
+   
+    this.apiUrl = ' https://boxe-backend.vercel.app/api';
 
     this.backendUrl = `${this.apiUrl}/ai/chat`;
     this.messagesUrl = `${this.apiUrl}/ai/messages`;

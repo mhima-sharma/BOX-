@@ -11,11 +11,17 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule,MatSnackBarModule,],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+    MatSnackBarModule
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
+
   @Input() product: any;
   selectedQuantity: number = 1;
 
@@ -29,14 +35,24 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    // ✅ Scroll to top when page loads
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
     const id = this.route.snapshot.paramMap.get('id');
+
     if (id) {
-      this.http.get(`https://backend-plant-website.vercel.app/api/products/${id}`).subscribe({
+      this.http.get(`http://boxe-backend.vercel.app/api/products/${id}`).subscribe({
         next: (res: any) => {
           this.product = res;
+
+          // Ensure quantity always exists
           if (!this.product.quantity) {
             this.product.quantity = 0;
           }
+
+          // Reset selected quantity when new product loads
+          this.selectedQuantity = 1;
         },
         error: (err) => {
           console.error('Error fetching product:', err);
@@ -46,7 +62,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   increaseQuantity() {
-    if (this.selectedQuantity < this.product.quantity) {
+    if (this.product && this.selectedQuantity < this.product.quantity) {
       this.selectedQuantity++;
     }
   }
@@ -57,55 +73,54 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
- 
-addToCart() {
-  const userId = this.authService.getUserId();
+  addToCart() {
 
-  if (!userId) {
-    this.snackBar.open('⚠️ Please log in to add items to your cart.', 'Close', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass: 'cart-snackbar-warning'
-    });
-    return;
-  }
+    const userId = this.authService.getUserId();
 
-  if (this.product.quantity === 0) {
-    this.snackBar.open('❌ Product is out of stock.', 'Close', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass: 'cart-snackbar-error'
-    });
-    return;
-  }
-
-  this.cartService.addToCart(
-    userId,
-    this.product.id,
-    this.selectedQuantity,
-    this.product.title,
-    this.product.price
-  ).subscribe({
-    next: () => {
-      this.snackBar.open('✅ Added to cart!', 'View Cart', {
-        duration: 4000,
+    if (!userId) {
+      this.snackBar.open('⚠️ Please log in to add items to your cart.', 'Close', {
+        duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        panelClass: 'cart-snackbar-success'
+        panelClass: 'cart-snackbar-warning'
       });
-    },
-    error: () => {
-      this.snackBar.open('❌ Failed to add to cart.', 'Close', {
+      return;
+    }
+
+    if (!this.product || this.product.quantity === 0) {
+      this.snackBar.open('❌ Product is out of stock.', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
         panelClass: 'cart-snackbar-error'
       });
+      return;
     }
-  });
-}
 
+    this.cartService.addToCart(
+      userId,
+      this.product.id,
+      this.selectedQuantity,
+      this.product.title,
+      this.product.price
+    ).subscribe({
+      next: () => {
+        this.snackBar.open('✅ Added to cart!', 'View Cart', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: 'cart-snackbar-success'
+        });
+      },
+      error: () => {
+        this.snackBar.open('❌ Failed to add to cart.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: 'cart-snackbar-error'
+        });
+      }
+    });
+  }
 
 }

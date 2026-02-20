@@ -1,54 +1,177 @@
-<!-- Modal Container -->
-<div class="fixed inset-0 z-50 flex items-center justify-center px-4">
-  <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 flex flex-col relative">
+<!-- Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm px-4">
+
+  <!-- Modal -->
+  <div class="bg-[#FDFBF7] w-full max-w-lg rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] p-6 flex flex-col relative border border-[#E8E2D9]">
 
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-800">Shopping Cart</h2>
-      <button (click)="close()" class="text-gray-500 hover:text-red-500 text-3xl transition absolute top-4 right-4">&times;</button>
+
+      <div>
+        <h2 class="text-xl sm:text-2xl font-semibold text-[#3E2F26] tracking-wide">
+          Your Cart
+        </h2>
+
+        <p class="text-sm text-[#9C8A7A] mt-1">
+          Review your selected plants
+        </p>
+      </div>
+
+      <button
+        routerLink="/show"
+        class="text-[#9C8A7A] hover:text-[#3E2F26] text-3xl transition absolute top-4 right-4">
+        &times;
+      </button>
+
     </div>
 
     <!-- Body -->
-    <div class="overflow-y-auto h-[60vh] custom-scrollbar pr-2">
-      <div class="flex-1 flex items-center justify-center text-gray-500 text-center min-h-[150px]" *ngIf="cartItems.length === 0">
-        No products in the cart.
+    <div class="overflow-y-auto max-h-[55vh] pr-1">
+
+      <!-- Empty State -->
+      <div
+        *ngIf="cartItems.length === 0"
+        class="flex flex-col items-center justify-center text-center py-16 text-[#9C8A7A]">
+
+        <p class="text-lg font-medium">
+          Your cart is empty
+        </p>
+
+        <p class="text-sm mt-1">
+          Discover our premium collection
+        </p>
+
       </div>
 
-      <div *ngFor="let item of cartItems" class="p-4 border mb-4 rounded-xl shadow flex items-center gap-4 hover:shadow-md transition">
+
+      <!-- Cart Item -->
+      <div
+        *ngFor="let item of cartItems"
+        class="flex gap-4 py-5 border-b border-[#ECE6DD] last:border-none">
+
+        <!-- Image -->
         <img
           [src]="item.images"
           alt="Product Image"
-          class="w-24 h-24 object-cover rounded-lg" />
-        <div class="flex-1">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ item.title }}</h3>
-          <p class="text-gray-600 mb-1">Price: ₹{{ item.price }}</p>
+          class="w-20 h-20 object-cover rounded-lg border border-[#ECE6DD]"
+        />
 
-          <!-- Quantity Controls -->
-          <div class="flex items-center gap-2 mt-2">
-            <button (click)="decreaseQuantity(item)" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full text-lg font-bold">-</button>
-            <span class="text-gray-700 font-medium">{{ item.quantity }}</span>
-            <button (click)="increaseQuantity(item)" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full text-lg font-bold">+</button>
+
+        <!-- Info -->
+        <div class="flex flex-col flex-1">
+
+          <!-- Title -->
+          <h3 class="text-[#3E2F26] font-medium text-base sm:text-lg">
+            {{ item.title }}
+          </h3>
+
+
+          <!-- Price -->
+          <p class="text-[#8B7355] text-sm mt-1">
+            ₹{{ item.price }}
+          </p>
+
+
+          <!-- Quantity + Total -->
+          <div class="flex items-center justify-between mt-3">
+
+            <!-- Quantity -->
+            <div class="flex items-center border border-[#D8CFC3] rounded-full">
+
+              <button
+                (click)="decreaseQuantity(item)"
+                class="px-3 py-1 text-[#3E2F26] hover:bg-[#F3EEE7] rounded-l-full">
+
+                −
+
+              </button>
+
+
+              <span class="px-3 text-sm font-medium text-[#3E2F26]">
+
+                {{ item.quantity }}
+
+              </span>
+
+
+              <button
+                (click)="increaseQuantity(item)"
+                class="px-3 py-1 text-[#3E2F26] hover:bg-[#F3EEE7] rounded-r-full">
+
+                +
+
+              </button>
+
+            </div>
+
+
+            <!-- Total -->
+            <p class="text-[#3E2F26] font-semibold text-sm">
+
+              ₹{{ item.price * item.quantity }}
+
+            </p>
+
           </div>
 
-          <p class="text-green-600 font-semibold mt-2">Total: ₹{{ item.price * item.quantity }}</p>
         </div>
+
       </div>
+
     </div>
 
-    <!-- ✅ Friendly Confirmation Message -->
-    <div class="mt-6 mb-2 px-4 py-3 bg-yellow-100 text-yellow-800 rounded-lg text-center text-sm sm:text-base">
-      🔔 Please review and confirm your products before placing the order.
+
+    <!-- Premium Notice -->
+    <div class="mt-6 mb-4 text-center text-sm text-[#8B7355] bg-[#F3EEE7] py-3 rounded-lg">
+
+      Please confirm your selection before checkout
+
     </div>
 
-    <!-- Footer -->
-    <div class="flex flex-col sm:flex-row gap-4">
-      <button routerLink="/store" (click)="close()" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-full transition">
-        CONTINUE SHOPPING
+
+
+    <!-- Footer Buttons -->
+    <div class="flex flex-col sm:flex-row gap-3">
+
+      <!-- Continue -->
+      <button
+        routerLink="/store"
+        (click)="close()"
+        class="w-full border border-[#D8CFC3]
+               text-[#3E2F26]
+               font-medium
+               py-3
+               rounded-full
+               hover:bg-[#F3EEE7]
+               transition">
+
+        Continue Shopping
+
       </button>
-      <button (click)="onBuyNow(); close()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-full transition">
-        BUY NOW
+
+
+
+      <!-- Buy Now -->
+      <button
+        (click)="onBuyNow(); close()"
+        class="w-full
+               bg-[#3E2F26]
+               text-white
+               font-medium
+               py-3
+               rounded-full
+               hover:bg-[#2B1F18]
+               transition
+               shadow-sm">
+
+        Checkout
+
       </button>
+
+
     </div>
+
 
   </div>
+
 </div>

@@ -31,10 +31,11 @@ export class CreateproductComponent {
     'Other'
   ];
 
-  private baseUrl =
-    window.location.hostname === 'localhost'
-      ? 'http://localhost:3000/api/products'
-      : 'https://backend-plant-website.vercel.app/api/products';
+  private baseUrl ='https://boxe-backend.vercel.app/api/products';
+    // window.location.hostname === 'localhost'
+    //   ? 'http://localhost:3000/api/products'
+    //   : 'https://backend-plant-website.vercel.app/api/products';
+      //  this.apiUrl = 'https://boxe-backend.vercel.app/api/products';
 
   constructor(
     private fb: FormBuilder,

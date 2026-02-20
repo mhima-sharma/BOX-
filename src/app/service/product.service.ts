@@ -13,9 +13,10 @@ export class ProductService {
 
   constructor(private http: HttpClient) {
     const isLocalhost = window.location.hostname === 'localhost';
-    this.apiUrl = isLocalhost
-      ? 'http://localhost:3000/api/products'
-      : 'https://backend-plant-website.vercel.app/api/products';
+    // this.apiUrl = isLocalhost
+    //   ? 'http://localhost:3000/api/products'
+    //   : 'https://backend-plant-website.vercel.app/api/products';
+      this.apiUrl = 'https://boxe-backend.vercel.app/api/products';
   }
 
   // ✅ Get all products

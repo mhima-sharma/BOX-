@@ -25,6 +25,7 @@ export class BuynowComponent implements AfterViewInit {
   loading = false;
   city: string = '';
   pincode: string = '';
+  currentStep = 1;
 
   @ViewChild('addressInput') addressInput!: ElementRef;
 
@@ -44,9 +45,11 @@ export class BuynowComponent implements AfterViewInit {
     this.userId = this.authService.getUserId() ?? 0;
 
     const isLocalhost = window.location.hostname === 'localhost';
-    this.apiUrl = isLocalhost
-      ? 'http://localhost:3000/api'
-      : 'https://backend-plant-website.vercel.app/api';
+    // this.apiUrl = isLocalhost
+    //   ? 'http://localhost:3000/api'
+    //   : 'https://backend-plant-website.vercel.app/api';
+
+    this.apiUrl = 'https://boxe-backend.vercel.app/api';
 
     this.checkoutForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -60,6 +63,27 @@ export class BuynowComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initGoogleAutocomplete();
   }
+  
+
+nextStep(){
+if(this.currentStep < 3){
+this.currentStep++;
+}
+}
+
+prevStep(){
+if(this.currentStep > 1){
+this.currentStep--;
+}
+}
+
+stepClass(step:number){
+
+return this.currentStep >= step
+? 'step-active'
+: 'step-inactive';
+
+}
 
   initGoogleAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete(this.addressInput.nativeElement, {
@@ -157,7 +181,7 @@ updatePrice() {
       key: 'rzp_test_uEJqigl3qciRzl',
       amount: orderRes.amount,
       currency: orderRes.currency,
-      name: 'Plant Store',
+      name: 'BOXÉ',
       description: 'Order Payment',
       order_id: orderRes.razorpayOrderId,
       handler: (res: any) => {
@@ -179,7 +203,7 @@ updatePrice() {
         email: this.checkoutForm.value.email,
         contact: this.checkoutForm.value.phoneNumber
       },
-      theme: { color: '#5CB85C' }
+      theme: { color: '#2d2218' }
     };
 
     const rzp = new Razorpay(options);
@@ -227,7 +251,7 @@ updatePrice() {
           }
         });
       },
-      theme: '#5CB85C'
+      theme: '#2d2218'
     });
   }
 getSelectedItemCount(): number {
@@ -242,3 +266,5 @@ getSelectedItemCount(): number {
     });
   }
 }
+
+

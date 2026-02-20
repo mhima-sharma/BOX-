@@ -22,7 +22,7 @@ export class SuccessPaymentComponent implements OnInit {
 
     if (this.txnid && this.status) {
       // ✅ Call backend to update payment status
-      this.http.post('http://localhost:3000/api/payment/update-easebuzz-status', {
+      this.http.post('https://boxe-backend.vercel.app/api/payment/update-easebuzz-status', {
         txnid: this.txnid,
         status: this.status
       }).subscribe({

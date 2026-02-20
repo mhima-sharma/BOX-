@@ -12,9 +12,12 @@ export class PaymentService {
 
   constructor(private http: HttpClient) {
     const isLocalhost = window.location.hostname === 'localhost';
-    this.apiUrl = isLocalhost
-      ? 'http://localhost:3000/api'
-      : 'https://backend-plant-website.vercel.app/api';
+    // this.apiUrl = isLocalhost
+    //   ? 'http://localhost:3000/api'
+    //   : 'https://backend-plant-website.vercel.app/api';
+    //   https://boxe-backend.vercel.app/
+    this.apiUrl = 'https://boxe-backend.vercel.app/api';
+   
   
   }
 

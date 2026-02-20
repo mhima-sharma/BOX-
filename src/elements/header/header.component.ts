@@ -27,6 +27,7 @@ interface CartItem {
 export class HeaderComponent implements OnInit, OnDestroy {
   logoPath: string = '../../img/logo little-leafy.png';
   isMobileMenuOpen = false;
+  isMenuOpen = false;
   isMoreMenuOpen = false;
   showLogoutModal = false;
   isLoggedIn = false;

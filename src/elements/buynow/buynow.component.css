@@ -1,9 +1,198 @@
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+to { transform: rotate(360deg); }
 }
 
 .animate-spin {
-  animation: spin 1s linear infinite;
+animation: spin 1s linear infinite;
+}
+
+
+/* STEP CIRCLE */
+
+.stepClass {
+
+width:32px;
+
+height:32px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:12px;
+
+background:#EDE6DC;
+
+color:#6B5E53;
+
+border:1px solid #E5DDD2;
+
+}
+
+.step-active {
+
+background:#2B221A;
+
+color:white;
+
+}
+
+
+
+/* STEP LINE */
+
+.step-line{
+
+width:50px;
+
+height:1px;
+
+background:#E5DDD2;
+
+}
+
+
+
+/* TITLE */
+
+.section-title{
+
+font-size:17px;
+
+margin-bottom:16px;
+
+color:#2B221A;
+
+font-family:serif;
+
+letter-spacing:0.05em;
+
+}
+
+
+
+/* INPUT */
+
+.boxe-input{
+
+width:100%;
+
+padding:10px 12px;
+
+border:1px solid #E5DDD2;
+
+border-radius:6px;
+
+font-size:13px;
+
+background:white;
+
+}
+
+.boxe-input:focus{
+
+outline:none;
+
+border-color:#C6A76B;
+
+}
+
+
+
+/* BUTTON */
+
+.boxe-btn{
+
+background:#2B221A;
+
+color:white;
+
+padding:10px 24px;
+
+font-size:12px;
+
+letter-spacing:0.08em;
+
+border-radius:6px;
+
+}
+
+.boxe-btn:hover{
+
+opacity:.9;
+
+}
+
+
+
+.boxe-btn-outline{
+
+border:1px solid #2B221A;
+
+color:#2B221A;
+
+padding:10px 24px;
+
+font-size:12px;
+
+letter-spacing:0.08em;
+
+border-radius:6px;
+
+}
+
+
+
+/* PAYMENT */
+
+.payment-option{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:10px 12px;
+
+border:1px solid #E5DDD2;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+
+
+/* SUMMARY */
+
+.summary-row{
+
+display:flex;
+
+justify-content:space-between;
+
+color:#6B5E53;
+
+font-size:13px;
+
+}
+
+.summary-total{
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:15px;
+
+color:#2B221A;
+
+font-weight:600;
+
 }

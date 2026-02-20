@@ -5,7 +5,6 @@ import { SignupAdminComponent } from '../userProfile/signup-admin/signup-admin.c
 import { LoginUserComponent } from '../userProfile/login-user/login-user.component';
 import { SignupUserComponent } from '../userProfile/signup-user/signup-user.component';
 import { StoreComponent } from '../elements/store/store.component';
-import { AboutUsComponent } from '../elements/about-us/about-us.component';
 import { ContactUsComponent } from '../elements/contact-us/contact-us.component';
 import { CartComponent } from '../elements/cart/cart.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
@@ -15,12 +14,11 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { ChatComponent } from './chat/chat.component';
 import { SuccessPaymentComponent } from '../success-payment/success-payment.component';
 import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
-
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
-import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
 import { SplashComponent } from '../elements/splash/splash.component';
 import { PlantAccessoriesComponent } from './plant-accessories/plant-accessories.component';
+import { CartDisplayComponent } from './cart-display/cart-display.component';
 
 
 export const routes: Routes = [
@@ -31,7 +29,6 @@ export const routes: Routes = [
     { path: 'signup-admin', component: SignupAdminComponent },
     { path: 'signup-user', component: SignupUserComponent },
     { path: 'store', component: StoreComponent },
-    { path: 'about', component: AboutUsComponent },
     { path: 'contact', component: ContactUsComponent },
     { path: 'cart', component: CartComponent },
     { path: 'admindash', component: AdminDashboardComponent },
@@ -43,8 +40,10 @@ export const routes: Routes = [
     { path: 'payfail', component: FaliedPaymentComponent},
     { path: 'chat', component: ChatbotComponent},
     { path: 'intro', component: IntroductionComponent},
-    { path: 'terms', component: TermPolicyComponent},
     { path: 'accessories', component: PlantAccessoriesComponent},
+    { path: 'show-cart', component: CartDisplayComponent},
+
+
 
     
 

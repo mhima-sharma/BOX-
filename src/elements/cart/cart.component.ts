@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../app/service/cart.service';
@@ -14,14 +14,16 @@ import { AuthService } from '../../app/auth.service';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
+
   showCartSummary = false;
   cartItems: any[] = [];
   userId: number | null = null;
+ isCartOpen = false;
 
   constructor(
     private cartService: CartService,
     private authService: AuthService,
-    public dialogRef: MatDialogRef<CartComponent>,
+    @Optional() public dialogRef: MatDialogRef<CartComponent>,
     private dialog: MatDialog
   ) {}
 
@@ -41,7 +43,7 @@ export class CartComponent implements OnInit {
     this.cartService.getCartItems(this.userId).subscribe({
       next: (res: any[]) => {
         this.cartItems = res;
-        this.cartService.notifyCartUpdated(); // Notify subscribers like header
+        this.cartService.notifyCartUpdated();
       },
       error: (err) => {
         console.error('Failed to load cart:', err);
@@ -49,19 +51,24 @@ export class CartComponent implements OnInit {
     });
   }
 
-  close(): void {
-    this.dialogRef.close();
-  }
+  // close(): void {
+  //   if (this.dialogRef) {
+  //     this.dialogRef.close();
+  //   }
+  // }
+  close() {
+  this.isCartOpen = false;
+}
 
   onBuyNow(): void {
     const dialogRef = this.dialog.open(BuynowComponent, {
-      width: '1000px',
+      // width: '1000px',
       disableClose: false,
       data: { cart: this.cartItems },
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.loadCart(); // Reload cart in case of changes
+      this.loadCart();
     });
   }
 
@@ -82,11 +89,12 @@ export class CartComponent implements OnInit {
   removeItem(item: any): void {
     const index = this.cartItems.findIndex(i => i.id === item.id);
     if (index !== -1) {
-      this.cartItems.splice(index, 1); // update local cart
+      this.cartItems.splice(index, 1);
+
       this.cartService.removeCartItem(item.id).subscribe({
         next: () => {
           console.log('Item removed');
-          this.cartService.notifyCartUpdated(); // Notify header
+          this.cartService.notifyCartUpdated();
         },
         error: (err: any) => {
           console.error('Failed to remove item:', err);
@@ -99,7 +107,7 @@ export class CartComponent implements OnInit {
     this.cartService.updateCartItem(item).subscribe({
       next: () => {
         console.log('Quantity updated');
-        this.cartService.notifyCartUpdated(); // Notify header
+        this.cartService.notifyCartUpdated();
       },
       error: (err: any) => {
         console.error('Failed to update quantity:', err);

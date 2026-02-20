@@ -1,8 +1,6 @@
-// src/app/login-user/login-user.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../app/auth.service';
@@ -10,13 +8,15 @@ import { AuthService } from '../../app/auth.service';
 @Component({
   selector: 'app-login-user',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, HttpClientModule,FormsModule,ReactiveFormsModule,CommonModule],
+  imports: [RouterLink, ReactiveFormsModule, HttpClientModule, FormsModule, CommonModule],
   templateUrl: './login-user.component.html',
   styleUrls: ['./login-user.component.css']
 })
 export class LoginUserComponent implements OnInit {
   loginForm!: FormGroup;
-  showPassword: boolean = false;
+  showPassword = false;
+  loading = false; // optional: to show a spinner while logging in
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -27,22 +27,38 @@ export class LoginUserComponent implements OnInit {
     });
   }
 
- onLogin(): void {
-  if (this.loginForm.invalid) return;
+  onLogin(): void {
+    if (this.loginForm.invalid) return;
 
-  const { email, password } = this.loginForm.value;
-  this.authService.login({ email, password }).subscribe({
-    next: (res) => {
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('user', JSON.stringify(res.user)); // storing user info
+    this.loading = true;
+    this.errorMessage = null;
 
-      this.router.navigate(['/show']); // or whatever route you have
-    },
-    error: (err) => alert(err.error.message || 'Login failed'),
-  });
-}
-togglePassword() {
-  this.showPassword = !this.showPassword;
-}
+    const { email, password } = this.loginForm.value;
+    this.authService.login({ email, password }).subscribe({
+      next: (res) => {
+        if (!res.token || !res.user) {
+          this.errorMessage = 'Login failed: invalid server response';
+          this.loading = false;
+          return;
+        }
 
+        // Save token and user info via AuthService session handling
+        this.authService.logout(); // clear any previous session
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+
+        this.router.navigate(['/show']);
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        this.errorMessage = err?.error?.details || err?.error?.error || 'Login failed';
+        this.loading = false;
+      }
+    });
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 }

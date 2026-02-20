@@ -12,10 +12,11 @@ interface Message {
 })
 export class SocketService {
   private socket: Socket;
-  private apiUrl='http://localhost:3000/api'
+  private apiUrl='https://boxe-backend.vercel.app/api'
+  //  this.apiUrl = 'https://boxe-backend.vercel.app/api';
 
   constructor(private http: HttpClient) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://boxe-backend.vercel.app');
   }
 
   //Start One to One

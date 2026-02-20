@@ -1,26 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup-user',
-  // standalone: true,
   imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './signup-user.component.html',
-  styleUrl: './signup-user.component.css'
+  styleUrls: ['./signup-user.component.css']
 })
 export class SignupUserComponent implements OnInit {
   signupForm!: FormGroup;
-  errorMessage: any;
   showPassword: boolean = false;
-showConfirmPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+  errorMessage: string | null = null; // ✅ Added property for template
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router // <-- Inject Router here
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,28 +32,36 @@ showConfirmPassword: boolean = false;
   }
 
   onSignup() {
-    if (this.signupForm.invalid) return;
+    this.errorMessage = null; // Reset error message
+
+    if (this.signupForm.invalid) {
+      this.errorMessage = 'Please fill in all required fields correctly.';
+      return;
+    }
 
     const { name, email, password, confirmPassword } = this.signupForm.value;
+
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      this.errorMessage = 'Passwords do not match.';
       return;
     }
 
     this.authService.signup({ name, email, password }).subscribe({
       next: () => {
-        alert('Signup successful');
-        this.router.navigate(['/']); // <-- Navigate on success
+        this.router.navigate(['/']); // Navigate on success
       },
-      error: err => alert(err.error.message || 'Signup failed'),
+      error: err => {
+        // Display error in template
+        this.errorMessage = err.error?.message || 'Signup failed. Please try again.';
+      },
     });
   }
 
   togglePassword() {
-  this.showPassword = !this.showPassword;
-}
+    this.showPassword = !this.showPassword;
+  }
 
-toggleConfirmPassword() {
-  this.showConfirmPassword = !this.showConfirmPassword;
-}
+  toggleConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
 }

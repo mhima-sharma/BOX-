@@ -14,9 +14,10 @@ export class CartService {
 
   constructor(private http: HttpClient) {
     const isLocalhost = window.location.hostname === 'localhost';
-    this.baseUrl = isLocalhost
-      ? 'http://localhost:3000/api/cart'
-      : 'https://backend-plant-website.vercel.app/api/cart';
+    // this.baseUrl = isLocalhost
+    //   ? 'https://boxe-backend.vercel.app/api/cart'
+    //   : 'https://backend-plant-website.vercel.app/api/cart';
+    this.baseUrl = 'https://boxe-backend.vercel.app/api/cart';
   }
 
   // ✅ Use this whenever cart changes
