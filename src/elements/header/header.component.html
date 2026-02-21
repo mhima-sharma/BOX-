@@ -18,15 +18,13 @@
   </div>
 </div>
 
-
-
 <!-- MAIN HEADER -->
 <header class="w-full bg-[#D8BFAE] border-b border-[#EADFD6] relative">
 
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
 
     <!-- MOBILE MENU BUTTON -->
-    <button 
+    <button
       class="sm:hidden text-[#3E2F2B] text-xl"
       (click)="isMenuOpen = !isMenuOpen">
       <i class="fas fa-bars"></i>
@@ -40,30 +38,44 @@
 
     <!-- LOGO -->
     <div class="absolute left-1/2 transform -translate-x-1/2 sm:static sm:transform-none text-center">
-      <a routerLink="/"
-         class="text-2xl sm:text-3xl tracking-[0.5em] text-[#F6F1EB] font-[Playfair_Display]">
+      <a
+        routerLink="/"
+        class="text-2xl sm:text-3xl tracking-[0.5em] text-[#F6F1EB] font-[Playfair_Display]">
         BOXÉ
       </a>
     </div>
 
     <!-- RIGHT ICONS -->
     <div class="flex items-center gap-5 sm:gap-8 text-sm text-[#3E2F2B]">
-      <!-- <i class="fas fa-search cursor-pointer hover:text-[#C6A76E] transition"></i> -->
-  <a routerLink="/show-cart">
-  <i class="fas fa-shopping-bag cursor-pointer hover:text-[#C6A76E] transition"></i>
-</a>
 
-<i 
-  class="fas fa-user cursor-pointer hover:text-[#C6A76E] transition"
-  routerLink="/user-login">
-</i>
+      <!-- CART -->
+      <a routerLink="/show-cart">
+        <i class="fas fa-shopping-bag cursor-pointer hover:text-[#C6A76E] transition"></i>
+      </a>
+
+      <!-- USER / LOGOUT -->
+      <ng-container *ngIf="isLoggedIn; else loginIcon">
+        <button
+          (click)="openLogoutPopup()"
+          class="uppercase text-[10px] tracking-[0.25em] hover:text-[#C6A76E] transition">
+          Logout
+        </button>
+      </ng-container>
+
+      <ng-template #loginIcon>
+        <i
+          class="fas fa-user cursor-pointer hover:text-[#C6A76E] transition"
+          routerLink="/user-login">
+        </i>
+      </ng-template>
+
     </div>
 
   </div>
 
   <!-- MOBILE DROPDOWN MENU -->
-  <div 
-    *ngIf="isMenuOpen" 
+  <div
+    *ngIf="isMenuOpen"
     class="sm:hidden bg-[#EADFD6] border-t border-[#D8BFAE] px-6 py-4 space-y-4 text-sm tracking-[0.3em] uppercase text-[#3E2F2B]">
 
     <a routerLink="/show" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">Home</a>
@@ -71,6 +83,57 @@
     <a routerLink="/intro" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">About</a>
     <a routerLink="/contact" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">Contact</a>
 
+    <!-- MOBILE LOGIN / LOGOUT -->
+    <ng-container *ngIf="isLoggedIn; else mobileLogin">
+      <button
+        (click)="openLogoutPopup()"
+        class="block w-full text-left hover:text-[#C6A76E]"
+      >
+        Logout
+      </button>
+    </ng-container>
+
+    <ng-template #mobileLogin>
+      <a
+        routerLink="/user-login"
+        class="block hover:text-[#C6A76E]"
+        (click)="isMenuOpen=false">
+        Login
+      </a>
+    </ng-template>
+
   </div>
 
 </header>
+
+<!-- LOGOUT CONFIRMATION MODAL -->
+<div
+  *ngIf="showLogoutModal"
+  class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+  <div class="bg-[#F6F1EB] rounded-lg w-[90%] max-w-sm p-6 text-center shadow-xl">
+
+    <h3 class="text-lg font-semibold text-[#3E2F2B] mb-2">
+      Confirm Logout
+    </h3>
+
+    <p class="text-sm text-[#6B5A54] mb-6">
+      Are you sure you want to logout?
+    </p>
+
+    <div class="flex justify-center gap-4">
+      <button
+        (click)="closeLogoutPopup()"
+        class="px-4 py-2 text-xs uppercase tracking-wider border border-[#3E2F2B] text-[#3E2F2B] hover:bg-[#3E2F2B] hover:text-white transition">
+        Cancel
+      </button>
+
+      <button
+        (click)="confirmLogout()"
+        class="px-4 py-2 text-xs uppercase tracking-wider bg-[#3E2F2B] text-white hover:opacity-90 transition">
+        Logout
+      </button>
+    </div>
+
+  </div>
+</div>
