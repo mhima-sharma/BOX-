@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/product-details/product-details.component.css"],
+  "sourcesContent": ["/* Success snackbar */\r\n.cart-snackbar-success {\r\n  background-color: #22c55e; /* green */\r\n  color: white;\r\n  font-weight: bold;\r\n}\r\n\r\n/* Warning snackbar */\r\n.cart-snackbar-warning {\r\n  background-color: #facc15; /* yellow */\r\n  color: #000;\r\n  font-weight: bold;\r\n}\r\n\r\n/* Error snackbar */\r\n.cart-snackbar-error {\r\n  background-color: #ef4444; /* red */\r\n  color: white;\r\n  font-weight: bold;\r\n}\r\n"],
+  "mappings": ";AACA,CAAA;AACE,oBAAA;AACA,SAAA;AACA,eAAA;AACF;AAGA,CAAA;AACE,oBAAA;AACA,SAAA;AACA,eAAA;AACF;AAGA,CAAA;AACE,oBAAA;AACA,SAAA;AACA,eAAA;AACF;",
+  "names": []
+}

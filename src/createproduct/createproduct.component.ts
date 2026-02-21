@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../app/service/product.service';
-import { RouterLink } from '@angular/router';
+import { AdminSidebarComponent } from "../admin/admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule,  AdminSidebarComponent],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })
@@ -20,16 +20,8 @@ export class CreateproductComponent {
 
   products: any[] = [];
 
-  // ✅ Category list (static for now)
-  categories: string[] = [
-    'Electronics',
-    'Fashion',
-    'Shoes',
-    'Furniture',
-    'Books',
-    'Beauty',
-    'Other'
-  ];
+
+ 
 
   private baseUrl ='https://boxe-backend.vercel.app/api/products';
     // window.location.hostname === 'localhost'

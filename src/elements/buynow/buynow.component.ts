@@ -7,6 +7,7 @@ import { FormBuilder,FormGroup,ReactiveFormsModule,Validators} from '@angular/fo
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var Razorpay: any;
 
@@ -35,7 +36,8 @@ export class BuynowComponent implements AfterViewInit {
     private http: HttpClient,
     private cartService: CartService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.cartItems = (data?.cart || []).map((item: any) => ({
       ...item,
@@ -125,6 +127,12 @@ updatePrice() {
   this.getTotal();}
 
   placeOrder() {
+    console.log('Placing order with data:', {
+      userId: this.userId,
+      billingDetails: this.checkoutForm.value,
+      cartItems: this.cartItems.filter(item => item.selected),
+      totalAmount: this.getTotal()
+    },"----",this.checkoutForm);
     if (this.checkoutForm.invalid) {
       this.checkoutForm.markAllAsTouched();
       return;
@@ -195,7 +203,18 @@ updatePrice() {
           status: 'success'
         }).subscribe(() => {
           this.clearCart(orderRes.txnId);
-          this.router.navigate(['/paysucess'], { queryParams: { txnid: orderRes.txnId } });
+          this.closeAllActiveDialogs();
+          this.router.navigate(['/paysucess'], {
+            queryParams: {
+              paymentMethod: 'razorpay',
+              txnid: orderRes.txnId,
+              razorpay_order_id: orderRes.razorpayOrderId,
+              razorpay_payment_id: res.razorpay_payment_id,
+              razorpay_signature: res.razorpay_signature,
+              status: 'success',
+              totalAmount: this.getTotal()
+            }
+          });
         });
       },
       prefill: {
@@ -219,6 +238,7 @@ updatePrice() {
         razorpay_signature: '',
         status: 'failure'
       }).subscribe(() => {
+        this.closeAllActiveDialogs();
         this.router.navigate(['/payfail'], { queryParams: { txnid: orderRes.txnId } });
       });
     });
@@ -245,8 +265,17 @@ updatePrice() {
         }).subscribe(() => {
           if (res.status === 'success') {
             this.clearCart(res.txnid);
-            this.router.navigate(['/paysucess'], { queryParams: { txnid: res.txnid } });
+            this.closeAllActiveDialogs();
+            this.router.navigate(['/paysucess'], {
+              queryParams: {
+                paymentMethod: 'easebuzz',
+                txnid: res.txnid,
+                status: res.status,
+                totalAmount: this.getTotal()
+              }
+            });
           } else {
+            this.closeAllActiveDialogs();
             this.router.navigate(['/payfail'], { queryParams: { txnid: res.txnid } });
           }
         });
@@ -264,6 +293,10 @@ getSelectedItemCount(): number {
         this.loading = false;
       });
     });
+  }
+
+  private closeAllActiveDialogs(): void {
+    this.dialog.closeAll();
   }
 }
 

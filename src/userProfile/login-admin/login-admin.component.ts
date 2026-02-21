@@ -36,7 +36,7 @@ export class LoginAdminComponent {
       next: (res) => {
         localStorage.setItem('token', res.token); // ✅ optional: save token
         this.loading = false;
-        this.router.navigate(['/admindash']);
+        this.router.navigate(['/admin']);
       },
       error: (err) => {
         this.loading = false;

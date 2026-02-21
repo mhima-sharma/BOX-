@@ -1,129 +1,139 @@
-<div class="max-w-4xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden">
-  <!-- Header with a banner image -->
-  <div
-    class="relative h-56 bg-cover bg-center"
-    style="background-image: url('https://images.unsplash.com/photo-1512499617640-c2f9990385bc');">
-    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-white drop-shadow-xl">
-        🌿 Add a New Plant Product
-      </h2>
-    </div>
-  </div>
+<div class="flex min-h-screen bg-[#F5F1EA]">
 
-  <!-- GIF at the top -->
-  <div class="flex justify-center mt-6">
-    <img
-      src="https://i.graphicmama.com/uploads/2023/3/64254d39d07c0-cartoon-doughnut-character-animator-gifs.gif"
-      alt="Plant growing"
-      class="w-32 h-32 rounded-full shadow-lg border-4 border-green-300" />
-  </div>
+  <!-- Sidebar -->
+  <app-admin-sidebar></app-admin-sidebar>
 
-  <!-- Form Section -->
-  <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="p-8 space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <label class="block text-gray-700 font-semibold mb-2">🌱 Title</label>
-        <input
-          formControlName="title"
-          type="text"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-          placeholder="Enter product title" />
+  <!-- Main -->
+  <div class="flex-1 px-4 sm:px-6 py-6">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden">
+
+      <!-- Header -->
+     
+
+      <!-- Form -->
+      <form
+        [formGroup]="productForm"
+        (ngSubmit)="submitForm()"
+        class="p-5 sm:p-6 space-y-5"
+      >
+ <div class="h-28 bg-[#EFE8DE] flex items-center justify-center">
+        <div class="text-center">
+          <h2 class="text-2xl sm:text-3xl font-serif text-[#4A3F35]">
+            Add New Product
+          </h2>
+          <p class="text-[11px] tracking-[0.2em] text-[#8C7B6B] mt-1">
+            BOXÉ Premium Collection
+          </p>
+        </div>
       </div>
-      <div>
-  <label class="block text-gray-700 font-semibold mb-2">🌿 Category</label>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-  <select
-    formControlName="category"
-    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+          <!-- Title -->
+          <div>
+            <label class="block text-xs text-[#6E6257] mb-1">
+              Product Title
+            </label>
+            <input
+              formControlName="title"
+              type="text"
+              placeholder="Enter title"
+              class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-[#E5DED3] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E]"
+            />
+          </div>
 
-    <option value="">Select category</option>
+          <!-- Category -->
+          <div>
+            <label class="block text-xs text-[#6E6257] mb-1">
+              Category
+            </label>
+            <select
+              formControlName="category"
+              class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-[#E5DED3] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E]"
+            >
+              <option value="">Select category</option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Flowers">Flowers</option>
+              <option value="Chocolates">Chocolates</option>
+              <option value="Gift Hampers">Gift Hampers</option>
+              <option value="Soft Toys">Soft Toys</option>
+              <option value="Perfumes">Perfumes</option>
+              <option value="Watches">Watches</option>
+              <option value="Greeting Cards">Greeting Cards</option>
+              <option value="Luxury Gifts">Luxury Gifts</option>
+              <option value="Corporate Gifts">Corporate Gifts</option>
+            </select>
+          </div>
 
-    <option value="Indoor Plant">Indoor Plant</option>
+          <!-- Quantity -->
+          <div>
+            <label class="block text-xs text-[#6E6257] mb-1">
+              Quantity
+            </label>
+            <input
+              formControlName="quantity"
+              type="number"
+              placeholder="Qty"
+              class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-[#E5DED3] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E]"
+            />
+          </div>
 
-    <option value="Outdoor Plant">Outdoor Plant</option>
+          <!-- Price -->
+          <div>
+            <label class="block text-xs text-[#6E6257] mb-1">
+              Price (₹)
+            </label>
+            <input
+              formControlName="price"
+              type="number"
+              step="0.01"
+              placeholder="Price"
+              class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-[#E5DED3] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E]"
+            />
+          </div>
 
-    <option value="Succulent">Succulent</option>
+          <!-- Upload -->
+          <div class="md:col-span-2">
+            <label class="block text-xs text-[#6E6257] mb-1">
+              Upload Images
+            </label>
+            <input
+              type="file"
+              multiple
+              (change)="onFileChange($event)"
+              class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-dashed border-[#D8CFC2] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E] file:mr-3 file:px-3 file:py-1 file:rounded-full file:border-0 file:text-xs file:bg-[#E8DFD1] file:text-[#4A3F35]"
+            />
+          </div>
 
-    <option value="Flowering Plant">Flowering Plant</option>
+        </div>
 
-    <option value="Medicinal Plant">Medicinal Plant</option>
+        <!-- Description -->
+        <div>
+          <label class="block text-xs text-[#6E6257] mb-1">
+            Description
+          </label>
+          <textarea
+            formControlName="description"
+            rows="3"
+            placeholder="Product details..."
+            class="w-full px-3 py-2 text-sm bg-[#F8F6F2] border border-[#E5DED3] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#C6A76E]"
+          ></textarea>
+        </div>
 
-    <option value="Bonsai">Bonsai</option>
+        <!-- Button -->
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="w-full bg-[#4A3F35] text-white text-sm tracking-wide py-2.5 rounded-lg hover:bg-[#3B332B] transition"
+          >
+            Add Product
+          </button>
+        </div>
 
-    <option value="Seeds">Seeds</option>
+      </form>
 
-  </select>
+    
 
-</div>
-
-
-      <div>
-        <label class="block text-gray-700 font-semibold mb-2">🔢 Quantity</label>
-        <input
-          formControlName="quantity"
-          type="number"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-          placeholder="Enter quantity" />
-      </div>
-
-      <div>
-        <label class="block text-gray-700 font-semibold mb-2">💸 Price (Rs.)</label>
-        <input
-          formControlName="price"
-          type="number"
-          step="0.01"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-          placeholder="Enter price" />
-      </div>
-
-      <div>
-        <label class="block text-gray-700 font-semibold mb-2">🖼️ Image Upload</label>
-        <input
-          type="file"
-          multiple
-          (change)="onFileChange($event)"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-800 hover:file:bg-green-200" />
-      </div>
     </div>
-
-    <div>
-      <label class="block text-gray-700 font-semibold mb-2">📝 Description</label>
-      <textarea
-        formControlName="description"
-        rows="4"
-        placeholder="Enter details like care tips, sunlight, watering, etc."
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"></textarea>
-    </div>
-
-    <!-- Success GIF / Decorative -->
-    <div class="text-center">
-      <img
-        src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif"
-        class="mx-auto w-24 h-24"
-        alt="Nature Happy" />
-    </div>
-
-    <!-- Submit Button -->
-    <div>
-      <button
-        type="submit"
-        class="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-700 transition">
-        ➕ Add Product
-      </button>
-    </div>
-  </form>
-
-  <!-- View Added Products Button -->
-  <div class="text-center mt-4 mb-8">
-    <a
-      routerLink="/admindash"
-      class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 ease-in-out">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M15 19l-7-7 7-7" />
-      </svg>
-      Show My Added Products
-    </a>
   </div>
 </div>

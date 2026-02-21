@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/show-case-of-my-project/show-case-of-my-project.component.css"],
+  "sourcesContent": ["html, body {\r\n  margin: 0;\r\n  padding: 0;\r\n}"],
+  "mappings": ";AAAA;AAAA;AACE,UAAA;AACA,WAAA;AACF;",
+  "names": []
+}

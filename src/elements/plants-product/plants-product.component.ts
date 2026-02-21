@@ -17,6 +17,9 @@ export class PlantsProductComponent {
   products: any[] = [];
   searchQuery: string = '';
   showAll: boolean = false;
+  categories: string[] = ['All', 'Watches', 'Jewelry', 'Perfumes' , 'Soft Toys', 'Gift Hampers', 'Chocolates', 'Flowers', 'Greeting Cards', 'Luxury Gifts', 'Corporate Gifts'];
+  selectedCategory: string = 'All';
+  
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -45,13 +48,22 @@ export class PlantsProductComponent {
   }
 
   get filteredProducts(): any[] {
-    const query = this.searchQuery.toLowerCase().trim();
-    if (!query) return this.products;
-    return this.products.filter(product =>
-      (product?.name?.toLowerCase().includes(query) ?? false) ||
-      (product?.description?.toLowerCase().includes(query) ?? false)
-    );
-  }
+  const query = this.searchQuery.toLowerCase().trim();
+
+  return this.products.filter(product => {
+
+    const matchesSearch =
+      !query ||
+      product.title?.toLowerCase().includes(query) ||
+      product.description?.toLowerCase().includes(query);
+
+    const matchesCategory =
+      this.selectedCategory === 'All' ||
+      product.category === this.selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+}
 
   get visibleProducts(): any[] {
     return this.showAll ? this.filteredProducts : this.filteredProducts.slice(0, 8);

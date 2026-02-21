@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/elements/header/header.component.css"],
+  "sourcesContent": ["\r\n/* .nav-link {\r\n  @apply text-green-700 text-lg font-semibold hover:text-lime-600 transition decoration-none;\r\n} */\r\nbody {\r\n\r\nfont-family: 'Inter', sans-serif;\r\nbackground-color: white;\r\ncolor: black;\r\n\r\n}"],
+  "mappings": ";AAIA;AAEA,eAAA,OAAA,EAAA;AACA,oBAAA;AACA,SAAA;AAEA;",
+  "names": []
+}

@@ -1,0 +1,36 @@
+<div class="flex bg-[#F6F1EB] min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 h-screen w-64 bg-[#F9F5F0] border-r border-[#E1D7CD] shadow-lg">
+    <div class="p-6">
+      <h2 class="text-2xl font-bold text-[#8B5E3C] mb-8">
+        Admin Panel
+      </h2>
+
+      <nav class="space-y-3 text-sm font-medium">
+        <a routerLink="/admindash"
+           routerLinkActive="bg-[#F3E8D0] text-[#C6A76E]"
+           class="block py-3 px-4 rounded-lg hover:bg-[#F3E8D0] transition">
+          Dashboard
+        </a>
+        <a routerLink="/products"
+           routerLinkActive="bg-[#F3E8D0] text-[#C6A76E]"
+           class="block py-3 px-4 rounded-lg hover:bg-[#F3E8D0] transition">
+          Manage Products
+        </a>
+
+        <a routerLink="/addProduct"
+           routerLinkActive="bg-[#F3E8D0] text-[#C6A76E]"
+           class="block py-3 px-4 rounded-lg hover:bg-[#F3E8D0] transition">
+          Add Product
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Right Panel -->
+  <div class="flex-1 ml-64 p-8 overflow-y-auto h-screen">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

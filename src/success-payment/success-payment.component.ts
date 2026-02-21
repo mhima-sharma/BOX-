@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-success-payment',
+  imports: [CommonModule],
   templateUrl: './success-payment.component.html',
   styleUrls: ['./success-payment.component.css']
 })
@@ -11,6 +13,10 @@ export class SuccessPaymentComponent implements OnInit {
   txnid: string | null = '';
   amount: string | null = '';
   status: string | null = '';
+  Order:string | null = '';
+razorpayOrderId: string | null = '';
+
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/elements/store/store.component.css"],
+  "sourcesContent": ["@keyframes slide {\r\n  0% { transform: translateX(0%); }\r\n  100% { transform: translateX(-50%); }\r\n}\r\n.animate-slide {\r\n  animation: slide 25s linear infinite;\r\n}"],
+  "mappings": ";AAAA,WAAA;AACE;AAAK,eAAA,WAAA;AAA2B;AAChC;AAAO,eAAA,WAAA;AAA6B;AACtC;AACA,CAAA;AACE,aAAA,MAAA,IAAA,OAAA;AACF;",
+  "names": []
+}
