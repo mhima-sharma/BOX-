@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-[#F6F1EB] px-5 sm:px-8 md:px-12 lg:px-16 py-8">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.25em] text-[#3E2F2B]">
+      ALL ORDERS
+    </h1>
+    <p class="text-sm text-[#8C6F5E] mt-2">
+      Complete overview of customer transactions.
+    </p>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center text-[#8C6F5E] py-20">
+    Loading orders...
+  </div>
+
+  <!-- Orders List -->
+  <div *ngIf="!loading" class="space-y-6">
+
+    <div *ngFor="let order of orders"
+         class="bg-white border border-[#E8DFD3] rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+
+      <!-- Top Row -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+
+        <div>
+          <p class="text-xs tracking-[0.2em] text-[#A67C52] mb-1">
+            ORDER ID
+          </p>
+          <p class="text-lg font-light text-[#3E2F2B]">
+            #{{ order.id }}
+          </p>
+        </div>
+
+        <div class="text-left md:text-right">
+          <p class="text-sm text-[#8C6F5E]">
+            ₹{{ order.total_amount }}
+          </p>
+          <span class="text-xs px-3 py-1 rounded-full bg-[#F3ECE4] text-[#6B4F3B]">
+            {{ order.payment_status }}
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Billing -->
+      <div class="border-t border-[#F1E8DD] pt-4 text-sm text-[#5E4B42]">
+        <p class="font-medium mb-1">
+          {{ order.billingDetails?.full_name }}
+        </p>
+        <p>{{ order.billingDetails?.address }}</p>
+        <p>{{ order.billingDetails?.city }}, {{ order.billingDetails?.state }}</p>
+      </div>
+
+      <!-- Items -->
+      <div class="mt-4 border-t border-[#F1E8DD] pt-4">
+        <p class="text-xs tracking-[0.2em] text-[#A67C52] mb-2">
+          ITEMS
+        </p>
+
+        <div *ngFor="let item of order.items"
+             class="flex justify-between text-sm text-[#3E2F2B] py-1">
+          <span>{{ item.product_name }}</span>
+          <span>₹{{ item.price }} × {{ item.quantity }}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

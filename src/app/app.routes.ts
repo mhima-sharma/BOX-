@@ -21,6 +21,7 @@ import { PlantAccessoriesComponent } from './plant-accessories/plant-accessories
 import { CartDisplayComponent } from './cart-display/cart-display.component';
 import { AdminSidebarComponent } from '../admin/admin-sidebar/admin-sidebar.component';
 import { ManageProductsComponent } from '../admin/manage-products/manage-products.component';
+import { AllOrdersComponent } from '../admin/all-orders/all-orders.component';
 
 
 export const routes: Routes = [
@@ -46,6 +47,7 @@ export const routes: Routes = [
         { path: 'admin-login', component: LoginAdminComponent },
         { path: 'admindash', component: AdminDashboardComponent },
         { path: 'products', component: ManageProductsComponent },
+        { path: 'all-orders', component: AllOrdersComponent },
 
         { path: 'addProduct', component: CreateproductComponent }, //create product from admin
 
