@@ -8,6 +8,10 @@ import { CartService } from '../app/service/cart.service';
 import { AuthService } from '../app/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
+// ✅ ADD THIS IMPORT
+import { SeoService } from '../app/seo.service';
+
+
 @Component({
   selector: 'app-product-details',
   standalone: true,
@@ -31,28 +35,39 @@ export class ProductDetailsComponent implements OnInit {
     private http: HttpClient,
     private cartService: CartService,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+
+    // ✅ ADD THIS
+    private seo: SeoService
+
   ) {}
 
   ngOnInit(): void {
 
-    // ✅ Scroll to top when page loads
     window.scrollTo({ top: 0, behavior: 'auto' });
 
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      this.http.get(`http://boxe-backend.vercel.app/api/products/${id}`).subscribe({
+      this.http.get(`https://boxe-backend.vercel.app/api/products/${id}`).subscribe({
         next: (res: any) => {
+
           this.product = res;
 
-          // Ensure quantity always exists
           if (!this.product.quantity) {
             this.product.quantity = 0;
           }
 
-          // Reset selected quantity when new product loads
           this.selectedQuantity = 1;
+
+
+          // ✅ ADD THIS BLOCK (SEO)
+          this.seo.update(
+            this.product.title + ' | BOXÉ Official Store',
+            this.product.description || 'Shop premium products at BOXÉ. Discover high-quality lifestyle items, accessories, and exclusive collections with fast delivery and secure checkout.'
+          );
+
+
         },
         error: (err) => {
           console.error('Error fetching product:', err);

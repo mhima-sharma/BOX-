@@ -1,5 +1,4 @@
-
-<!-- BOXÉ LUXURY CHECKOUT — PREMIUM MINIMAL RESPONSIVE -->
+<!-- BOXÉ LUXURY CHECKOUT -->
 
 <div class="min-h-screen bg-[#F6F2EC] py-8 px-4 sm:px-6 pb-32 sm:pb-8"
      [formGroup]="checkoutForm">
@@ -13,16 +12,11 @@
                  font-serif
                  text-[#2B221A]
                  tracking-[0.08em]">
-
         CHECKOUT
-
       </h1>
 
-      <p class="text-[#8B8074]
-                text-sm mt-2 tracking-wide">
-
+      <p class="text-[#8B8074] text-sm mt-2 tracking-wide">
         Securely complete your order
-
       </p>
 
     </div>
@@ -50,94 +44,71 @@
 
 
 
-    <!-- MAIN CARD -->
-    <div class="bg-white
-                border border-[#E8E1D8]
-                rounded-2xl
-                shadow-[0_8px_30px_rgba(0,0,0,0.04)]
-                p-6 sm:p-10">
+    <!-- CARD -->
+    <div class="bg-white border border-[#E8E1D8] rounded-2xl shadow p-6 sm:p-10">
 
 
-
-      <!-- STEP 1 BILLING -->
+      <!-- STEP 1 -->
       <div *ngIf="currentStep===1">
 
         <h2 class="section-title">
-
           Billing Information
-
         </h2>
-
 
         <div class="grid sm:grid-cols-2 gap-5">
 
-          <div class="sm:col-span-2">
-
-            <input
-              formControlName="fullName"
-              placeholder="Full Name"
-              class="boxe-input">
-
-          </div>
+          <input formControlName="fullName"
+                 placeholder="Full Name"
+                 class="boxe-input sm:col-span-2">
 
 
-          <input
-            formControlName="email"
-            placeholder="Email Address"
-            class="boxe-input">
+          <input formControlName="email"
+                 placeholder="Email Address"
+                 class="boxe-input">
 
 
-          <input
-            formControlName="phoneNumber"
-            placeholder="Phone Number"
-            class="boxe-input">
+          <input formControlName="phoneNumber"
+                 placeholder="Phone Number"
+                 class="boxe-input">
 
 
-          <textarea
-            rows="3"
-            formControlName="shippingAddress"
-            placeholder="Shipping Address"
-            class="boxe-input sm:col-span-2">
+          <textarea formControlName="shippingAddress"
+                    placeholder="Shipping Address"
+                    class="boxe-input sm:col-span-2">
           </textarea>
-
 
         </div>
 
+        <div class="mt-10 text-right">
 
-        <!-- BUTTON -->
-        <div class="flex flex-col sm:flex-row gap-3 sm:justify-end mt-10">
-
-          <button
-            (click)="nextStep()"
-            class="boxe-btn w-full sm:w-auto">
-
+          <button (click)="nextStep()"
+                  class="boxe-btn">
             Continue
-
           </button>
 
         </div>
-
 
       </div>
 
 
 
-
-      <!-- STEP 2 REVIEW -->
+      <!-- STEP 2 -->
       <div *ngIf="currentStep===2">
 
         <h2 class="section-title">
-
           Order Summary
-
         </h2>
 
+        <!-- <div *ngFor="let item of cartItems"
+             class="flex justify-between py-4 border-b">
 
+          <span>{{item.title}}</span>
 
-        <div class="divide-y divide-[#F1ECE5]">
+          <span>₹{{item.price * item.quantity}}</span>
 
+        </div> -->
 
-          <div *ngFor="let item of cartItems"
+         <div *ngFor="let item of cartItems"
                class="flex items-center gap-4 py-5">
 
             <img
@@ -171,86 +142,64 @@
 
           </div>
 
-        </div>
+        <div class="flex justify-between mt-8">
 
-
-
-        <!-- BUTTONS -->
-        <div class="flex flex-col sm:flex-row gap-3 sm:justify-between mt-10">
-
-          <button
-            (click)="prevStep()"
-            class="boxe-btn-outline w-full sm:w-auto">
-
+          <button (click)="prevStep()"
+                  class="boxe-btn-outline">
             Back
-
           </button>
 
-
-          <button
-            (click)="nextStep()"
-            class="boxe-btn w-full sm:w-auto">
-
+          <button (click)="nextStep()"
+                  class="boxe-btn">
             Continue
-
           </button>
 
         </div>
-
 
       </div>
-
 
 
 
       <!-- STEP 3 PAYMENT -->
       <div *ngIf="currentStep===3">
 
-        <h2 class="section-title">
-
+        <h2 class="section-title mb-6">
           Payment Method
-
         </h2>
 
 
-
+        <!-- PAYMENT OPTIONS -->
         <div class="space-y-3 mb-8">
 
+          <label class="payment-option flex gap-3">
 
-          <label class="payment-option">
-
-            <input
-              type="radio"
-              value="razorpay"
-              formControlName="paymentMethod">
+            <input type="radio"
+                   value="razorpay"
+                   formControlName="paymentMethod">
 
             Razorpay
 
           </label>
 
 
-          <label class="payment-option">
+          <label class="payment-option flex gap-3">
 
-            <input
-              type="radio"
-              value="easebuzz"
-              formControlName="paymentMethod">
+            <input type="radio"
+                   value="easebuzz"
+                   formControlName="paymentMethod">
 
             Easebuzz
 
           </label>
-
 
         </div>
 
 
 
         <!-- SUMMARY -->
+        <div class="space-y-3 border-t pt-6">
 
-        <div class="border-t border-[#EEE6DC] pt-6 mb-8 space-y-3">
-
-
-          <div class="summary-row">
+          <div class="flex justify-between">
 
             <span>Subtotal</span>
 
@@ -259,16 +208,23 @@
           </div>
 
 
-          <div class="summary-row">
+          <div class="flex justify-between text-green-700">
 
-            <span>Platform Fee</span>
+            <span>Discount (10%)</span>
 
-            <span>₹5</span>
+            <span>-₹{{getDiscount()}}</span>
 
           </div>
 
 
-          <div class="summary-total">
+          <div class="bg-green-50 p-2 rounded text-green-800 text-sm">
+
+            🎉 You saved ₹{{getDiscount()}}
+
+          </div>
+
+
+          <div class="flex justify-between font-semibold text-lg pt-3 border-t">
 
             <span>Total</span>
 
@@ -276,29 +232,22 @@
 
           </div>
 
-
         </div>
 
 
 
-        <!-- BUTTONS -->
-        <div class="flex flex-col sm:flex-row gap-3 sm:justify-between mt-10">
+        <div class="flex justify-between mt-10">
 
-          <button
-            (click)="prevStep()"
-            class="boxe-btn-outline w-full sm:w-auto">
-
+          <button (click)="prevStep()"
+                  class="boxe-btn-outline">
             Back
-
           </button>
 
+          <button (click)="placeOrder()"
+                  [disabled]="checkoutForm.invalid"
+                  class="boxe-btn">
 
-          <button
-            (click)="placeOrder()"
-           
-            class="boxe-btn w-full sm:w-auto">
-
-            Place Order
+            Place Order • ₹{{getTotal()}}
 
           </button>
 
@@ -308,28 +257,28 @@
       </div>
 
 
-
     </div>
+
 
   </div>
 
+
+
+  <!-- MOBILE STICKY BUTTON (NOW INSIDE formGroup ✅) -->
+
+  <div *ngIf="currentStep===3"
+       class="fixed bottom-0 left-0 right-0 bg-white border-t p-4 sm:hidden">
+
+    <button (click)="placeOrder()"
+            [disabled]="checkoutForm.invalid"
+            class="boxe-btn w-full">
+
+      Place Order • ₹{{getTotal()}}
+
+    </button>
+
+  </div>
+
+
+
 </div>
-
-
-
-<!-- MOBILE STICKY PLACE ORDER BUTTON -->
-
-<div *ngIf="currentStep===3"
-     class="sm:hidden fixed bottom-0 left-0 w-full bg-white border-t border-[#E8E1D8] p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-
-  <button
-    (click)="placeOrder()"
-    [disabled]="checkoutForm.invalid"
-    class="boxe-btn w-full">
-
-    Place Order • ₹{{getTotal()}}
-
-  </button>
-
-</div>
-

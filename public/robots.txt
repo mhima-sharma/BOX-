@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://boxe-black.vercel.app/assets/sitemap.xml

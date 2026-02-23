@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
-import { ShowCaseOfMyProjectComponent } from "../show-case-of-my-project/show-case-of-my-project.component";
+import { Router, NavigationEnd, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { filter } from 'rxjs/operators';
 
-declare let gtag: Function; // Declare the global gtag function
+import { SeoService } from './seo.service';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -13,17 +15,45 @@ declare let gtag: Function; // Declare the global gtag function
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'my-project';
 
-  constructor(private router: Router) {}
+  title = 'BOXÉ';
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private seo: SeoService
+  ) {}
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        gtag('config', 'G-N71CH0CJQM', {
-          page_path: event.urlAfterRedirects
-        });
+
+    this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+
+      // ✅ Google Analytics Tracking
+      gtag('config', 'G-N71CH0CJQM', {
+        page_path: event.urlAfterRedirects
+      });
+
+
+      // ✅ SEO Meta Tag Update
+      let route = this.activatedRoute.firstChild;
+
+      while (route?.firstChild) {
+        route = route.firstChild;
       }
+
+      if (route?.snapshot.data['title']) {
+
+        this.seo.update(
+          route.snapshot.data['title'],
+          route.snapshot.data['description']
+        );
+
+      }
+
     });
+
   }
+
 }

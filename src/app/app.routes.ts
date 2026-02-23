@@ -14,7 +14,6 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { ChatComponent } from './chat/chat.component';
 import { SuccessPaymentComponent } from '../success-payment/success-payment.component';
 import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
-
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { SplashComponent } from '../elements/splash/splash.component';
 import { PlantAccessoriesComponent } from './plant-accessories/plant-accessories.component';
@@ -22,51 +21,210 @@ import { CartDisplayComponent } from './cart-display/cart-display.component';
 import { AdminSidebarComponent } from '../admin/admin-sidebar/admin-sidebar.component';
 import { ManageProductsComponent } from '../admin/manage-products/manage-products.component';
 import { AllOrdersComponent } from '../admin/all-orders/all-orders.component';
+import { BoxeBlogComponent } from '../elements/boxe-blog/boxe-blog.component';
 
 
 export const routes: Routes = [
-    { path: 'show', component: ShowCaseOfMyProjectComponent },
-    { path: '', component: SplashComponent },
-    { path: 'user-login', component: LoginUserComponent },
-    { path: 'signup-admin', component: SignupAdminComponent },
-    { path: 'signup-user', component: SignupUserComponent },
-    { path: 'store', component: StoreComponent },
-    { path: 'contact', component: ContactUsComponent },
-    { path: 'cart', component: CartComponent },
-    { path: 'buynow', component: BuynowComponent },
-    { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'chat1', component: ChatComponent },
-    { path: 'paysucess', component: SuccessPaymentComponent },
-    { path: 'payfail', component: FaliedPaymentComponent},
-    { path: 'intro', component: IntroductionComponent},
-    { path: 'accessories', component: PlantAccessoriesComponent},
-    { path: 'show-cart', component: CartDisplayComponent},
 
-    //admin routes
-        { path: 'admin', component: AdminSidebarComponent },
-        { path: 'admin-login', component: LoginAdminComponent },
-        { path: 'admindash', component: AdminDashboardComponent },
-        { path: 'products', component: ManageProductsComponent },
-        { path: 'all-orders', component: AllOrdersComponent },
+    {
+        path: '',
+        component: SplashComponent,
+        data: {
+            title: 'BOXÉ Official Store | Premium Lifestyle & Exclusive Products',
+            description: 'BOXÉ is your destination for premium lifestyle products, accessories, and exclusive collections. Shop high-quality products with secure checkout.'
+        }
+    },
 
-        { path: 'addProduct', component: CreateproductComponent }, //create product from admin
+    {
+        path: 'store',
+        component: StoreComponent,
+        data: {
+            title: 'Shop Premium Products | BOXÉ Official Store',
+            description: 'Explore premium products at BOXÉ. Discover exclusive collections, modern essentials, and high-quality lifestyle items.'
+        }
+    },
+
+    {
+        path: 'product/:id',
+        component: ProductDetailsComponent,
+        data: {
+            title: 'Product Details | BOXÉ Official Store',
+            description: 'View detailed information, features, and pricing of premium BOXÉ products. Shop securely online.'
+        }
+    },
+
+    {
+        path: 'cart',
+        component: CartComponent,
+        data: {
+            title: 'Your Cart | BOXÉ Official Store',
+            description: 'Review your selected products, update quantities, and proceed to secure checkout.'
+        }
+    },
+
+    {
+        path: 'contact',
+        component: ContactUsComponent,
+        data: {
+            title: 'Contact Us | BOXÉ Official Store',
+            description: 'Contact BOXÉ for customer support, product inquiries, and assistance.'
+        }
+    },
+
+    {
+        path: 'boxe-blog',
+        component: BoxeBlogComponent,
+        data: {
+            title: 'BOXÉ Blog | News, Trends & Insights',
+            description: 'Discover the latest trends, news, and insights from BOXÉ.'
+        }
+    },
+
+    {
+        path: 'accessories',
+        component: PlantAccessoriesComponent,
+        data: {
+            title: 'Accessories & Collections | BOXÉ',
+            description: 'Explore premium accessories and exclusive collections at BOXÉ.'
+        }
+    },
+
+    {
+        path: 'user-login',
+        component: LoginUserComponent,
+        data: {
+            title: 'Login | BOXÉ Official Store',
+            description: 'Login to your BOXÉ account to manage orders and shop premium products.'
+        }
+    },
+
+    {
+        path: 'signup-user',
+        component: SignupUserComponent,
+        data: {
+            title: 'Create Account | BOXÉ Official Store',
+            description: 'Create your BOXÉ account and start shopping premium products.'
+        }
+    },
+
+    {
+        path: 'buynow',
+        component: BuynowComponent,
+        data: {
+            title: 'Secure Checkout | BOXÉ',
+            description: 'Complete your purchase securely with BOXÉ’s trusted checkout.'
+        }
+    },
+
+    {
+        path: 'paysucess',
+        component: SuccessPaymentComponent,
+        data: {
+            title: 'Payment Successful | BOXÉ',
+            description: 'Your order has been successfully placed. Thank you for shopping with BOXÉ.'
+        }
+    },
+
+    {
+        path: 'payfail',
+        component: FaliedPaymentComponent,
+        data: {
+            title: 'Payment Failed | BOXÉ',
+            description: 'Your payment could not be processed. Please try again.'
+        }
+    },
+
+    {
+        path: 'intro',
+        component: IntroductionComponent,
+        data: {
+            title: 'About BOXÉ | Official Store',
+            description: 'Learn more about BOXÉ, our mission, and our premium product collections.'
+        }
+    },
+
+    {
+        path: 'show-cart',
+        component: CartDisplayComponent,
+        data: {
+            title: 'Shopping Cart | BOXÉ',
+            description: 'View and manage your selected products.'
+        }
+    },
+
+    {
+        path: 'chat1',
+        component: ChatComponent,
+        data: {
+            title: 'Customer Support Chat | BOXÉ',
+            description: 'Chat with BOXÉ support for assistance and help.'
+        }
+    },
+
+    {
+        path: 'show',
+        component: ShowCaseOfMyProjectComponent,
+        data: {
+            title: 'Showcase | BOXÉ',
+            description: 'Explore featured showcases and highlights.'
+        }
+    },
 
 
-    
+    // ADMIN
 
+    {
+        path: 'admin-login',
+        component: LoginAdminComponent,
+        data: {
+            title: 'Admin Login | BOXÉ',
+            description: 'Administrator login panel.'
+        }
+    },
 
+    {
+        path: 'admin',
+        component: AdminSidebarComponent,
+        data: {
+            title: 'Admin Panel | BOXÉ',
+            description: 'BOXÉ administrator panel.'
+        }
+    },
 
+    {
+        path: 'admindash',
+        component: AdminDashboardComponent,
+        data: {
+            title: 'Admin Dashboard | BOXÉ',
+            description: 'BOXÉ dashboard overview.'
+        }
+    },
 
+    {
+        path: 'products',
+        component: ManageProductsComponent,
+        data: {
+            title: 'Manage Products | BOXÉ',
+            description: 'Manage and update BOXÉ products.'
+        }
+    },
 
+    {
+        path: 'all-orders',
+        component: AllOrdersComponent,
+        data: {
+            title: 'Manage Orders | BOXÉ',
+            description: 'View and manage customer orders.'
+        }
+    },
 
-
-    // { path: 'productDetail', component: ProductDetailsComponent }
-
-
-
-
-
-
-
+    {
+        path: 'addProduct',
+        component: CreateproductComponent,
+        data: {
+            title: 'Add Product | BOXÉ',
+            description: 'Add new product to BOXÉ store.'
+        }
+    }
 
 ];

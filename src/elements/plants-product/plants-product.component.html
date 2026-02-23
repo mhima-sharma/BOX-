@@ -55,6 +55,7 @@
           <div class="h-40 flex items-center justify-center mb-4 overflow-hidden bg-[#FAF7F3] rounded-lg">
             <img
               class="max-h-full object-contain transition duration-500 group-hover:scale-105"
+              loading="lazy"
               [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
               [alt]="product.title"
             />

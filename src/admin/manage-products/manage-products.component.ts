@@ -75,7 +75,7 @@ export class ManageProductsComponent implements OnInit {
     if (!confirm('Are you sure you want to delete this product?')) return;
 
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    this.http.delete(`${this.baseUrl}/products/${id}`, { headers }).subscribe({
+    this.http.delete(`${this.baseUrl}/${id}`, { headers }).subscribe({
       next: () => {
         this.products = this.products.filter(p => p.id !== id);
         console.log('Product deleted:', id);
@@ -102,3 +102,5 @@ export class ManageProductsComponent implements OnInit {
     );
   }
 }
+
+

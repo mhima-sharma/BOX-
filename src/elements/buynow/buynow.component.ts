@@ -114,17 +114,54 @@ return this.currentStep >= step
   }
 
  getSubtotal(): number {
+
   return this.cartItems
     .filter(item => item.selected)
     .reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 }
 
-getTotal(): number {
-  return this.getSubtotal() + 5;
+
+
+/* 10% Discount */
+getDiscount(): number {
+
+  return Math.round(this.getSubtotal() * 0.10);
+
 }
+
+
+
+/* Shipping */
+getShipping(): number {
+
+  return this.getSubtotal() < 300 ? 70 : 0;
+
+}
+
+
+
+/* Final Total */
+getTotal(): number {
+
+  return this.getSubtotal()
+         - this.getDiscount()
+         + this.getShipping();
+
+}
+
+
+
 updatePrice() {
+
   this.getSubtotal();
-  this.getTotal();}
+
+  this.getTotal();
+
+}
+
+
+
 
   placeOrder() {
     console.log('Placing order with data:', {
