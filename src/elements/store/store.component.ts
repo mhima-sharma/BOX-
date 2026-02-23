@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { NeedHelpComponent } from "../need-help/need-help.component";
 import { FooterComponent } from "../footer/footer.component";
-import { PlantsProductComponent } from "../plants-product/plants-product.component";
+import { PlantsProductComponent } from "../all-product/plants-product.component";
 import { CommonModule } from '@angular/common';
 
 @Component({

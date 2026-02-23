@@ -11,12 +11,10 @@ import { AdminDashboardComponent } from '../admin/admin-dashboard/admin-dashboar
 import { CreateproductComponent } from '../createproduct/createproduct.component';
 import { BuynowComponent } from '../elements/buynow/buynow.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { ChatComponent } from './chat/chat.component';
 import { SuccessPaymentComponent } from '../success-payment/success-payment.component';
 import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { SplashComponent } from '../elements/splash/splash.component';
-import { PlantAccessoriesComponent } from './plant-accessories/plant-accessories.component';
 import { CartDisplayComponent } from './cart-display/cart-display.component';
 import { AdminSidebarComponent } from '../admin/admin-sidebar/admin-sidebar.component';
 import { ManageProductsComponent } from '../admin/manage-products/manage-products.component';
@@ -81,15 +79,6 @@ export const routes: Routes = [
     },
 
     {
-        path: 'accessories',
-        component: PlantAccessoriesComponent,
-        data: {
-            title: 'Accessories & Collections | BOXÉ',
-            description: 'Explore premium accessories and exclusive collections at BOXÉ.'
-        }
-    },
-
-    {
         path: 'user-login',
         component: LoginUserComponent,
         data: {
@@ -149,15 +138,6 @@ export const routes: Routes = [
         data: {
             title: 'Shopping Cart | BOXÉ',
             description: 'View and manage your selected products.'
-        }
-    },
-
-    {
-        path: 'chat1',
-        component: ChatComponent,
-        data: {
-            title: 'Customer Support Chat | BOXÉ',
-            description: 'Chat with BOXÉ support for assistance and help.'
         }
     },
 

@@ -4,7 +4,7 @@ import { HeaderComponent } from "../elements/header/header.component";
 import { ContentComponent } from "../elements/content/content.component";
 import { FooterComponent } from "../elements/footer/footer.component";
 import { NeedHelpComponent } from "../elements/need-help/need-help.component";
-import { PlantsProductComponent } from "../elements/plants-product/plants-product.component";
+import { PlantsProductComponent } from "../elements/all-product/plants-product.component";
 
 import { CommonModule } from '@angular/common';
 
