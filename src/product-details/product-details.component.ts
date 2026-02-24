@@ -138,4 +138,38 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+
+  shareProduct() {
+
+  const productUrl = window.location.href;
+
+  if (navigator.share) {
+
+    navigator.share({
+      title: this.product.title,
+      text: this.product.description,
+      url: productUrl
+    }).catch(() => {});
+
+  } else {
+
+    navigator.clipboard.writeText(productUrl).then(() => {
+
+      this.snackBar.open('🔗 Product link copied!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+
+    }).catch(() => {
+
+      this.snackBar.open('❌ Failed to copy link.', 'Close', {
+        duration: 3000
+      });
+
+    });
+
+  }
+}
+
 }

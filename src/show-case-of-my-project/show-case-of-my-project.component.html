@@ -9,6 +9,20 @@
   <main class="flex-1">
 
     <app-content></app-content>
+    
+    <section *ngIf="showInstallCard"
+      class="pwa-install-wrap"
+      [class.pwa-install-wrap-side]="true">
+      <div class="pwa-install-card" [class.pwa-install-card-side]="true">
+        <p class="pwa-install-text">{{ installMessage }}</p>
+        <div *ngIf="!isInstalled" class="pwa-install-actions">
+          <button type="button" class="pwa-install-btn" (click)="installApp()">Install</button>
+          <button type="button" class="pwa-cancel-btn" (click)="dismissInstallCard()">Cancel</button>
+        </div>
+        <p *ngIf="isInstalled" class="pwa-install-help">App already installed on this device.</p>
+        <p *ngIf="installHelpText" class="pwa-install-help">{{ installHelpText }}</p>
+      </div>
+    </section>
 
     <!-- Collection -->
     <section class="py-20 bg-[#F6F1EB]">

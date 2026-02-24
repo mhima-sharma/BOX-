@@ -2,3 +2,68 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.pwa-install-wrap {
+  padding: 1rem 1.5rem 0;
+}
+
+.pwa-install-wrap-side {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  padding: 0;
+}
+
+.pwa-install-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #f1e3d8;
+  border: 1px solid #d8bfae;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.pwa-install-card-side {
+  width: min(320px, calc(100vw - 2rem));
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(62, 47, 43, 0.22);
+}
+
+.pwa-install-text {
+  margin: 0;
+  color: #3e2f2b;
+  font-weight: 600;
+}
+
+.pwa-install-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.pwa-install-btn {
+  background: #3e2f2b;
+  color: #f6f1eb;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.pwa-cancel-btn {
+  background: transparent;
+  color: #3e2f2b;
+  border: 1px solid #a28776;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.pwa-install-help {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  color: #6f5a52;
+}
