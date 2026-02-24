@@ -49,6 +49,9 @@ export class ShowCaseOfMyProjectComponent implements OnInit, OnDestroy {
     this.deferredPrompt = null;
   };
   private readonly onBeforeInstallPrompt = (event: Event) => {
+    if (this.isInstalled) {
+      return;
+    }
     const promptEvent = event as BeforeInstallPromptEvent;
     promptEvent.preventDefault();
     this.deferredPrompt = promptEvent;
@@ -65,8 +68,8 @@ export class ShowCaseOfMyProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.isInstalled = window.matchMedia('(display-mode: standalone)').matches;
-    this.showInstallCard = true;
+    this.isInstalled = this.checkIfInstalled();
+    this.showInstallCard = !this.isInstalled;
     this.showInstallCardOnSide = true;
     window.addEventListener('beforeinstallprompt', this.onBeforeInstallPrompt);
     window.addEventListener('appinstalled', this.onAppInstalled);
@@ -161,5 +164,11 @@ export class ShowCaseOfMyProjectComponent implements OnInit, OnDestroy {
       this.locationGranted = false;
       this.openPanel('weather');
     }
+  }
+
+  private checkIfInstalled(): boolean {
+    const isStandaloneDisplay = window.matchMedia('(display-mode: standalone)').matches;
+    const isIosStandalone = 'standalone' in navigator && (navigator as Navigator & { standalone?: boolean }).standalone === true;
+    return isStandaloneDisplay || isIosStandalone;
   }
 }
