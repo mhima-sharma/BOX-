@@ -1,3 +1,59 @@
+<!-- TOP BAR -->
+<div class="w-full text-[10px] sm:text-[11px] bg-[#E6D2C4] text-[#3E2F2B]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2 flex justify-between items-center">
+
+    <!-- LEFT SOCIAL -->
+    <div class="flex gap-3 sm:gap-4 opacity-80">
+
+
+
+  <!-- Instagram -->
+  <a
+    href="https://www.instagram.com/YOUR_USERNAME"
+    target="_blank"
+    aria-label="Instagram">
+
+    <i class="fab fa-instagram cursor-pointer hover:text-[#C6A76E] transition"></i>
+
+  </a>
+
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/YOUR_USERNAME"
+    target="_blank"
+    aria-label="Facebook">
+
+    <i class="fab fa-facebook cursor-pointer hover:text-[#C6A76E] transition"></i>
+
+  </a>
+
+
+  <!-- Twitter / X -->
+  <a
+    href="https://twitter.com/YOUR_USERNAME"
+    target="_blank"
+    aria-label="Twitter">
+
+    <i class="fab fa-twitter cursor-pointer hover:text-[#C6A76E] transition"></i>
+
+  </a>
+
+
+
+    </div>
+
+    <!-- RIGHT LINKS -->
+    <div class="hidden sm:flex gap-6 tracking-[0.25em] uppercase text-[10px]">
+      <a routerLink="/intro" class="hover:text-[#C6A76E] transition">About</a>
+      <a routerLink="/contact" class="hover:text-[#C6A76E] transition">Contact</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MAIN HEADER -->
 <!-- MAIN HEADER -->
 <header class="w-full bg-[#D8BFAE] border-b border-[#EADFD6] relative z-40">
 
@@ -146,3 +202,83 @@
   </div>
 
 </header>
+
+
+<!-- LOGOUT MODAL -->
+<div
+  *ngIf="showLogoutModal"
+  class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+  <div class="bg-[#F6F1EB] rounded-lg w-[90%] max-w-sm p-6 text-center shadow-xl">
+
+    <h3 class="text-lg font-semibold text-[#3E2F2B] mb-2">
+
+      Confirm Logout
+
+    </h3>
+
+
+    <p class="text-sm text-[#6B5A54] mb-6">
+
+      Are you sure you want to logout?
+
+    </p>
+
+
+    <div class="flex justify-center gap-4">
+
+      <button
+        (click)="closeLogoutPopup()"
+        class="px-4 py-2 text-xs uppercase tracking-wider border border-[#3E2F2B] text-[#3E2F2B] hover:bg-[#3E2F2B] hover:text-white transition">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        (click)="confirmLogout()"
+        class="px-4 py-2 text-xs uppercase tracking-wider bg-[#3E2F2B] text-white hover:opacity-90 transition">
+
+        Logout
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a
+  href="https://wa.me/917988543400?text=Hi%20BOXÉ,%20I%20need%20help"
+  target="_blank"
+  class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group">
+
+
+  <!-- pulse animation -->
+  <span class="absolute inset-0 rounded-full bg-green-400 opacity-75 animate-ping"></span>
+
+
+  <!-- main button -->
+  <div
+    class="relative flex items-center justify-center
+           w-12 h-12 sm:w-14 sm:h-14
+           bg-[#25D366]
+           rounded-full
+           shadow-lg
+           hover:scale-110
+           transition duration-300">
+
+
+    <i class="fab fa-whatsapp text-white text-xl sm:text-2xl"></i>
+
+
+  </div>
+
+
+</a>
