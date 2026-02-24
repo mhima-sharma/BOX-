@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HeaderComponent } from "../elements/header/header.component";
-import { ContentComponent } from "../elements/content/content.component";
 import { FooterComponent } from "../elements/footer/footer.component";
 import { NeedHelpComponent } from "../elements/need-help/need-help.component";
 import { PlantsProductComponent } from "../elements/all-product/plants-product.component";
@@ -18,7 +17,6 @@ interface BeforeInstallPromptEvent extends Event {
   standalone: true,
   imports: [
     HeaderComponent,
-    ContentComponent,
     FooterComponent,
     NeedHelpComponent,
     PlantsProductComponent,

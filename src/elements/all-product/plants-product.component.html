@@ -1,110 +1,206 @@
-<main class="flex-1 bg-[#F6F1EB] min-h-screen">
+<!-- <main class="flex-1 bg-[#F6F1EB] min-h-screen">
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-    <!-- ================= HEADING ================= -->
-    <section class="mb-10 text-center">
+    <section class="mb-12 text-center">
       <h3 class="text-2xl sm:text-3xl font-[Playfair_Display] tracking-widest text-[#3E2F2B]">
         Explore Gifts
       </h3>
     </section>
 
-    <!-- ================= SEARCH + FILTER ================= -->
-    <section class="flex justify-center mb-14">
+    <section class="flex justify-center mb-16">
       <form
-        class="w-full max-w-4xl flex flex-col sm:flex-row gap-3 sm:gap-4"
+        class="w-full max-w-4xl flex flex-col sm:flex-row gap-4"
         (submit)="onSearch($event)"
       >
-
-        <!-- SEARCH -->
-        <div
-          class="flex w-full border border-[#E6D2C4] bg-white shadow-md rounded-xl overflow-hidden"
-        >
+     
+        <div class="flex w-full bg-white rounded-full shadow overflow-hidden">
           <input
             type="text"
             [(ngModel)]="searchQuery"
             name="search"
             placeholder="Search luxury gifts..."
-            class="w-full px-4 py-3 text-sm focus:outline-none placeholder-[#A68C74]"
+            class="w-full px-6 py-3 text-sm focus:outline-none placeholder-[#A68C74]"
           />
           <button
             type="submit"
-            class="px-6 bg-[#C6A76E] text-white text-sm tracking-wider hover:opacity-90 transition"
+            class="px-8 bg-[#C6A76E] text-white text-sm tracking-wider hover:opacity-90 transition"
           >
             Search
           </button>
         </div>
 
-        <!-- FILTER DROPDOWN -->
+      
         <select
           [(ngModel)]="selectedCategory"
           name="category"
-          class="w-full sm:w-56 px-4 py-3 rounded-xl border border-[#E6D2C4] bg-white text-sm text-[#3E2F2B] shadow-md focus:outline-none"
+          class="w-full sm:w-52 px-5 py-3 rounded-full bg-white text-sm text-[#3E2F2B] shadow focus:outline-none"
         >
           <option value="">All Categories</option>
           <option *ngFor="let category of categories" [value]="category">
             {{ category }}
           </option>
         </select>
-
       </form>
     </section>
 
-    <!-- ================= PRODUCT GRID ================= -->
     <section *ngIf="filteredProducts.length > 0; else noResults">
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 
-        <div
-          class="group bg-white p-3 sm:p-4 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1"
-          *ngFor="let product of visibleProducts"
-        >
-          <div class="h-40 sm:h-48 flex items-center justify-center mb-3 sm:mb-4 overflow-hidden bg-[#FAF7F3] rounded-lg">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+
+
+        <div class="hidden lg:block col-span-1">
+          <div class="h-full rounded-xl overflow-hidden shadow">
             <img
-              class="max-h-full object-contain transition duration-500 group-hover:scale-105"
-              loading="lazy"
-              [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
-              [alt]="product.title"
+              src="assets/hero-furniture.jpg"
+              alt="Luxury Interior"
+              class="w-full h-full object-cover"
             />
           </div>
-
-          <h3 class="text-sm sm:text-base font-medium text-[#3E2F2B] truncate tracking-wide">
-            {{ product.title || 'Untitled Item' }}
-          </h3>
-
-          <p class="text-[#52504c] font-semibold mt-1 text-xs sm:text-sm">
-            Quantity: {{ product.quantity || 'N/A' }}
-          </p>
-
-          <p class="text-[#C6A76E] font-semibold mt-1 text-sm sm:text-base">
-            ₹{{ product.price || 'N/A' }}
-          </p>
-
-          <button
-            (click)="viewDetails(product.id)"
-            class="mt-3 w-full border border-[#C6A76E] text-[#3E2F2B] py-2 text-xs sm:text-sm tracking-wider rounded-lg hover:bg-[#C6A76E] hover:text-white transition"
-          >
-            View Details
-          </button>
         </div>
-      </div>
 
-      <!-- SHOW MORE -->
-      <div class="mt-12 text-center" *ngIf="!showAll && filteredProducts.length > 8">
-        <button
-          (click)="toggleShowAll()"
-          class="px-8 py-2 border border-[#C6A76E] text-[#3E2F2B] tracking-wider rounded-lg hover:bg-[#C6A76E] hover:text-white transition"
-        >
-          Show More
-        </button>
+    
+        <div class="col-span-1 lg:col-span-3">
+          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+            <div
+              *ngFor="let product of visibleProducts"
+              class="bg-white rounded-lg overflow-hidden hover:shadow-lg transition"
+            >
+
+          
+              <div class="h-44 sm:h-52 bg-[#F9F7F3] flex items-center justify-center">
+                <img
+                  [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
+                  [alt]="product.title"
+                  class="max-h-full object-contain transition duration-500 hover:scale-105"
+                />
+              </div>
+
+        
+              <div class="p-4">
+                <h3 class="text-sm font-medium text-[#3E2F2B] truncate">
+                  {{ product.title || 'Untitled Item' }}
+                </h3>
+
+                <p class="text-[#C6A76E] font-semibold mt-1 text-sm">
+                  ₹{{ product.price || 'N/A' }}
+                </p>
+
+                <button
+                  (click)="viewDetails(product.id)"
+                  class="mt-3 w-full text-xs tracking-wider border border-[#C6A76E] py-2 rounded hover:bg-[#C6A76E] hover:text-white transition"
+                >
+                  View Details
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          
+          <div class="mt-14 text-center" *ngIf="!showAll && filteredProducts.length > 8">
+            <button
+              (click)="toggleShowAll()"
+              class="px-10 py-2 border border-[#C6A76E] rounded tracking-wider hover:bg-[#C6A76E] hover:text-white transition"
+            >
+              Show More
+            </button>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- ================= NO RESULTS ================= -->
+ 
     <ng-template #noResults>
-      <p class="text-center text-[#8C7B70] mt-16 tracking-wide text-base">
+      <p class="text-center text-[#8C7B70] mt-20 tracking-wide">
         No matching products found.
       </p>
     </ng-template>
 
   </div>
-</main>
+</main> -->
+<!-- ================= PROMO / HERO ================= -->
+<section class="relative bg-[#F6F1EB] py-10 px-5 overflow-hidden">
+
+  <div class="absolute top-0 left-0 w-40 h-40 bg-[#E8D9C8]/30 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-0 w-40 h-40 bg-[#D8BFAE]/30 rounded-full blur-3xl"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto text-center">
+
+    <div class="inline-block mb-3 px-3 py-1 border border-[#C6A76E] text-[#8B7355] text-[9px] tracking-[0.28em] uppercase rounded-full bg-[#FDFBF8]">
+      Exclusive 10% Checkout Privilege
+    </div>
+
+    <h1 class="text-[22px] sm:text-[30px] font-[Playfair_Display] text-[#3E2F2B] tracking-[0.08em] mb-2">
+      Curated Luxury Gifts
+    </h1>
+
+    <p class="max-w-lg mx-auto text-[13px] text-[#7B6A58] leading-relaxed">
+      A refined selection of premium gifts curated for timeless elegance.
+    </p>
+
+  </div>
+</section>
+
+<!-- ================= CATEGORY WISE PRODUCTS ================= -->
+<section class="mt-14 space-y-16" *ngIf="filteredProducts.length > 0; else noResults">
+
+  <div *ngFor="let category of categories">
+
+    <!-- Category Heading -->
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg sm:text-xl font-[Playfair_Display] text-[#3E2F2B] tracking-wide">
+        {{ category }}
+      </h2>
+
+      <span class="text-xs text-[#A68C74] tracking-wider">
+        View All →
+      </span>
+    </div>
+
+    <!-- Horizontal Scroll -->
+    <div class="flex gap-5 overflow-x-auto pb-3 scrollbar-hide">
+
+      <div
+        *ngFor="let product of filteredProducts | categoryFilter: category"
+        class="min-w-[180px] sm:min-w-[220px] bg-white rounded-lg shadow hover:shadow-lg transition flex-shrink-0"
+      >
+
+        <!-- Image -->
+        <div class="h-36 sm:h-44 bg-[#F9F7F3] flex items-center justify-center rounded-t-lg">
+          <img
+            [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
+            class="max-h-full object-contain hover:scale-105 transition duration-500"
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="p-3">
+          <h3 class="text-xs sm:text-sm font-medium text-[#3E2F2B] truncate">
+            {{ product.title }}
+          </h3>
+
+          <p class="text-[#C6A76E] font-semibold mt-1 text-sm">
+            ₹{{ product.price }}
+          </p>
+
+          <button
+            (click)="viewDetails(product.id)"
+            class="mt-2 w-full text-[10px] border border-[#C6A76E] py-1 rounded hover:bg-[#C6A76E] hover:text-white transition"
+          >
+            View
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<ng-template #noResults>
+  <p class="text-center mt-20 text-[#8C7B70] tracking-wide">
+    No matching products found.
+  </p>
+</ng-template>

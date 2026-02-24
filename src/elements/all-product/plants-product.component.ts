@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { ProductService } from '../../app/service/product.service';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { CommonModule, NgIfContext } from '@angular/common';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
+import { CategoryFilterPipe } from "./category-filter.pipe";
 
 @Component({
   selector: 'app-plants-product',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CategoryFilterPipe],
   templateUrl: './plants-product.component.html',
   styleUrls: ['./plants-product.component.css']
 })
@@ -17,8 +18,9 @@ export class PlantsProductComponent {
   products: any[] = [];
   searchQuery: string = '';
   showAll: boolean = false;
-  categories: string[] = ['All', 'Watches', 'Jewelry', 'Perfumes' , 'Soft Toys', 'Gift Hampers', 'Chocolates', 'Flowers', 'Greeting Cards', 'Luxury Gifts', 'Corporate Gifts'];
+  categories: string[] = ['Watches', 'Jewelry', 'Perfumes' , 'Soft Toys', 'Gift Hampers', 'Chocolates', 'Flowers', 'Greeting Cards', 'Luxury Gifts', 'Corporate Gifts'];
   selectedCategory: string = 'All';
+noResults: TemplateRef<NgIfContext<boolean>> | null | undefined;
   
 
   constructor(private productService: ProductService, private router: Router) {}
@@ -26,6 +28,13 @@ export class PlantsProductComponent {
   ngOnInit(): void {
     this.fetchAllProducts();
   }
+
+
+  getProductsByCategory(category: string) {
+  return this.filteredProducts.filter(
+    product => product.category === category
+  );
+}
 
   fetchAllProducts(): void {
     this.productService.getAllProducts().subscribe({
