@@ -10,37 +10,38 @@
 
     <app-content></app-content>
     
+    <!-- PWA Install Card -->
     <section *ngIf="showInstallCard && !isInstalled"
-      class="pwa-install-wrap"
+      class="pwa-install-wrap px-4 sm:px-6"
       [class.pwa-install-wrap-side]="true">
-      <div class="pwa-install-card" [class.pwa-install-card-side]="true">
-        <p class="pwa-install-text">{{ installMessage }}</p>
-        <div class="pwa-install-actions">
-          <button type="button" class="pwa-install-btn" (click)="installApp()">Install</button>
-          <button type="button" class="pwa-cancel-btn" (click)="dismissInstallCard()">Cancel</button>
+      <div class="pwa-install-card px-4 py-6 sm:px-6 sm:py-8" [class.pwa-install-card-side]="true">
+        <p class="pwa-install-text text-sm sm:text-base">{{ installMessage }}</p>
+        <div class="pwa-install-actions flex flex-col sm:flex-row gap-2 mt-4">
+          <button type="button" class="pwa-install-btn w-full sm:w-auto" (click)="installApp()">Install</button>
+          <button type="button" class="pwa-cancel-btn w-full sm:w-auto" (click)="dismissInstallCard()">Cancel</button>
         </div>
-        <p *ngIf="installHelpText" class="pwa-install-help">{{ installHelpText }}</p>
+        <p *ngIf="installHelpText" class="pwa-install-help mt-2 text-xs sm:text-sm">{{ installHelpText }}</p>
       </div>
     </section>
 
     <!-- Collection -->
-    <section class="py-20 bg-[#F6F1EB]">
-      <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-4xl tracking-[0.3em] font-[Playfair_Display] mb-4">
+    <section class="py-16 sm:py-20 bg-[#F6F1EB]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl tracking-[0.25em] sm:tracking-[0.3em] font-[Playfair_Display] mb-3 sm:mb-4">
           Our Collection
         </h2>
-        <div class="w-16 h-[1px] bg-[#C6A76E] mx-auto mb-12"></div>
+        <div class="w-12 sm:w-16 h-[1px] bg-[#C6A76E] mx-auto mb-8 sm:mb-12"></div>
         <app-plants-product></app-plants-product>
       </div>
     </section>
 
     <!-- Brand -->
-    <section class="py-20 bg-[#E6D2C4]">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-[Playfair_Display] tracking-[0.2em] mb-8">
+    <section class="py-16 sm:py-20 bg-[#E6D2C4]">
+      <div class="max-w-3xl sm:max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl sm:text-3xl font-[Playfair_Display] tracking-[0.2em] mb-6 sm:mb-8">
           Crafted With Intention
         </h2>
-        <p class="text-lg leading-loose opacity-80">
+        <p class="text-base sm:text-lg leading-relaxed sm:leading-loose opacity-80">
           Every piece is curated with precision, wrapped with care,
           and designed to create an unforgettable unboxing experience.
         </p>
@@ -48,32 +49,32 @@
     </section>
 
     <!-- Why Choose -->
-    <section class="py-20 bg-[#F6F1EB]">
-      <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-[Playfair_Display] tracking-[0.2em] mb-16">
+    <section class="py-16 sm:py-20 bg-[#F6F1EB]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl sm:text-3xl font-[Playfair_Display] tracking-[0.2em] mb-12 sm:mb-16">
           Why Choose BOXÉ
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
           <div>
-            <h3 class="text-xl mb-4">Luxury Packaging</h3>
-            <p class="opacity-70">Minimal. Elegant. Memorable presentation.</p>
+            <h3 class="text-lg sm:text-xl mb-3">Luxury Packaging</h3>
+            <p class="text-sm sm:text-base opacity-70">Minimal. Elegant. Memorable presentation.</p>
           </div>
           <div>
-            <h3 class="text-xl mb-4">Premium Quality</h3>
-            <p class="opacity-70">Curated selections crafted to impress.</p>
+            <h3 class="text-lg sm:text-xl mb-3">Premium Quality</h3>
+            <p class="text-sm sm:text-base opacity-70">Curated selections crafted to impress.</p>
           </div>
           <div>
-            <h3 class="text-xl mb-4">Seamless Experience</h3>
-            <p class="opacity-70">From order to delivery — effortless.</p>
+            <h3 class="text-lg sm:text-xl mb-3">Seamless Experience</h3>
+            <p class="text-sm sm:text-base opacity-70">From order to delivery — effortless.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Need Help -->
-    <section class="py-20 bg-[#E6D2C4]">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-[Playfair_Display] tracking-[0.2em] mb-8">
+    <section class="py-16 sm:py-20 bg-[#E6D2C4]">
+      <div class="max-w-3xl sm:max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl sm:text-3xl font-[Playfair_Display] tracking-[0.2em] mb-6 sm:mb-8">
           Need Assistance?
         </h2>
         <app-need-help></app-need-help>
