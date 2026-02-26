@@ -1,0 +1,125 @@
+<app-header></app-header>
+
+<section
+  class="mt-14 space-y-8 px-4 sm:px-6 lg:px-8"
+  *ngIf="filteredProducts.length > 0; else noResults"
+>
+
+  <!-- HEADER -->
+
+  <h2
+    class="text-lg sm:text-xl font-[Playfair_Display] text-[#3E2F2B]"
+  >
+    Our Products
+  </h2>
+
+
+
+  <!-- CATEGORY TABS -->
+
+  <div class="flex gap-6 border-b border-[#E5DED6] pb-2 overflow-x-auto">
+
+
+    <span
+      *ngFor="let category of categories"
+      (click)="selectedCategory = category"
+      [class.text-[#3E2F2B]]="selectedCategory == category"
+      [class.text-[#A68C74]]="selectedCategory != category"
+      class="cursor-pointer text-sm font-medium whitespace-nowrap"
+    >
+      {{category}}
+    </span>
+
+
+  </div>
+
+
+
+
+  <!-- PRODUCTS GRID -->
+
+  <div
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"
+  >
+
+
+
+    <!-- CARD -->
+
+    <div
+      *ngFor="let product of filteredProducts"
+      class="bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col"
+    >
+
+
+
+      <!-- Image -->
+
+      <div
+        class="h-36 sm:h-44 bg-[#F9F7F3] flex items-center justify-center rounded-t-lg overflow-hidden"
+      >
+
+        <img
+          [src]="product.images?.split(',')[0] || 'assets/placeholder.jpg'"
+          class="max-h-full object-contain hover:scale-105 transition duration-500"
+        />
+
+      </div>
+
+
+
+      <!-- Info -->
+
+      <div class="p-3 flex flex-col flex-1">
+
+
+        <h3
+          class="text-xs sm:text-sm font-medium text-[#3E2F2B] line-clamp-2 min-h-[32px]"
+        >
+          {{ product.title }}
+        </h3>
+
+
+        <p class="text-[#C6A76E] font-semibold mt-1 text-sm">
+
+          ₹{{ product.price }}
+
+        </p>
+
+
+        <button
+          (click)="viewDetails(product.id)"
+          class="mt-auto w-full text-[10px] border border-[#C6A76E] py-1 rounded hover:bg-[#C6A76E] hover:text-white transition"
+        >
+          View
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</section>
+
+
+
+
+<!-- NO RESULTS -->
+
+<ng-template #noResults>
+
+  <p class="text-center mt-20 text-[#8C7B70]">
+    No matching products found.
+  </p>
+
+</ng-template>
+
+
+<app-footer></app-footer>
