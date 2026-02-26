@@ -1,0 +1,132 @@
+<app-header></app-header>
+
+<!-- Page Wrapper -->
+<div class="min-h-screen bg-[#F6F1EB] pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+
+  <!-- Container -->
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Page Header -->
+    <div class="mb-10">
+
+      <h1 class="text-2xl sm:text-3xl font-[Playfair_Display] text-[#3E2F2B]">
+        Complaints Management
+      </h1>
+
+      <p class="text-sm text-[#8B7355] mt-2">
+        View and manage customer concerns
+      </p>
+
+      <div class="w-16 h-[2px] bg-[#C6A769] mt-4"></div>
+
+    </div>
+
+
+    <!-- Complaints Grid -->
+    <div
+      *ngIf="complaints.length > 0; else emptyState"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+    >
+
+      <!-- Complaint Card -->
+      <div
+        *ngFor="let complaint of complaints"
+        class="bg-white border border-[#E8DFD6] rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+      >
+
+        <!-- Top Row -->
+        <div class="flex justify-between items-start mb-4">
+
+          <!-- Complaint ID -->
+          <span class="text-xs tracking-wide text-[#8B7355] font-medium">
+            COMPLAINT #{{ complaint.id }}
+          </span>
+
+
+          <!-- Status Badge -->
+          <span
+            class="text-xs px-3 py-1 rounded-full font-medium tracking-wide"
+
+            [ngClass]="complaint.status === 'resolved'
+              ? 'bg-[#E8E2D8] text-[#3E2F2B]'
+              : 'bg-[#F3ECE4] text-[#8B7355]'"
+          >
+            {{ complaint.status | titlecase }}
+          </span>
+
+        </div>
+
+
+        <!-- Message -->
+        <p class="text-sm text-[#5C4A3E] leading-relaxed mb-6 min-h-[60px]">
+
+          {{ complaint.user_message }}
+
+        </p>
+
+
+        <!-- Footer -->
+        <div class="flex justify-between items-center border-t border-[#EFE7DE] pt-4">
+
+
+          <!-- Date -->
+          <span class="text-xs text-[#A38E7A]">
+
+            {{ complaint.timestamp | date:'mediumDate' }}
+
+          </span>
+
+
+          <!-- Premium Indicator -->
+          <span
+            *ngIf="complaint.status === 'resolved'"
+            class="text-[10px] tracking-widest text-[#C6A769] font-semibold"
+          >
+            RESOLVED
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Empty State -->
+    <ng-template #emptyState>
+
+      <div class="flex flex-col items-center justify-center py-20">
+
+        <div
+          class="w-16 h-16 rounded-full bg-[#EFE7DE] flex items-center justify-center mb-4"
+        >
+          <svg
+            class="w-6 h-6 text-[#8B7355]"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 12h6m-6 4h6M9 8h6m-7 12h8a2 2 0 002-2V6a2 2 0 00-2-2H8l-4 4v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+
+
+        <h3 class="text-lg font-[Playfair_Display] text-[#3E2F2B]">
+          No Complaints Found
+        </h3>
+
+        <p class="text-sm text-[#8B7355] mt-1">
+          Customer complaints will appear here
+        </p>
+
+      </div>
+
+    </ng-template>
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>

@@ -21,6 +21,9 @@ import { ManageProductsComponent } from '../admin/manage-products/manage-product
 import { AllOrdersComponent } from '../admin/all-orders/all-orders.component';
 import { BoxeBlogComponent } from '../elements/boxe-blog/boxe-blog.component';
 import { ViewAllComponent } from '../elements/all-product/view-all/view-all.component';
+import { ComplaintsComponent } from '../admin/complaints/complaints/complaints.component';
+import { AllComplaintsComponent } from '../admin/complaints/all-complaints/all-complaints.component';
+import { ComplaintBoxComponent } from '../admin/complaints/complaint-box/complaint-box.component';
 
 
 export const routes: Routes = [
@@ -158,6 +161,22 @@ export const routes: Routes = [
             description: 'Explore all products available in BOXÉ.'
         }
     },
+     {
+        path: 'allcomplaint',
+        component: AllComplaintsComponent,
+        data: {
+            title: 'All Complaints | BOXÉ',
+            description: 'View and manage all complaints submitted by users.'
+        }
+    },
+      {
+        path: 'write-complaint',
+        component: ComplaintBoxComponent,
+        data: {
+            title: 'Write Complaint | BOXÉ',
+            description: 'Write and submit a complaint to BOXÉ.'
+        }
+    },
 
 
     // ADMIN
@@ -213,6 +232,14 @@ export const routes: Routes = [
         data: {
             title: 'Add Product | BOXÉ',
             description: 'Add new product to BOXÉ store.'
+        }
+    },
+     {
+        path: 'complaint',
+        component: ComplaintsComponent,
+        data: {
+            title: 'Complaints | BOXÉ',
+            description: ' manage complaints for BOXÉ products.'
         }
     }
 

@@ -1,0 +1,94 @@
+<!-- Header -->
+<app-header></app-header>
+
+<!-- Premium Luxury Background -->
+<div class="min-h-screen bg-[#F6F1EB] flex items-center justify-center px-4 py-10 pt-28">
+
+  <!-- Complaint Card -->
+  <div
+    class="w-full max-w-xl bg-white border border-[#E8DFD6] rounded-2xl shadow-lg p-6 sm:p-8 transition-all duration-300">
+
+    <!-- Title -->
+    <h2
+      class="text-xl sm:text-2xl font-[Playfair_Display] text-[#3E2F2B] text-center mb-2 tracking-wide">
+
+      Contact Support
+
+    </h2>
+
+    <p class="text-center text-sm text-[#8B7355] mb-6">
+
+      We value your experience. Please share your concern below.
+
+    </p>
+
+    <!-- Notice Box -->
+    <div
+      class="bg-[#F9F5F0] border border-[#E8DFD6] text-[#6B5B4D] rounded-xl p-4 text-sm mb-6 leading-relaxed">
+
+      <span class="font-medium text-[#3E2F2B]">Note:</span>
+
+      Your complaint will be reviewed and resolved within
+      <span class="font-semibold text-[#3E2F2B]">2–3 working days</span>.
+
+    </div>
+
+    <!-- Textarea -->
+    <div class="mb-4">
+
+      <label
+        class="block text-sm font-medium text-[#3E2F2B] mb-2">
+
+        Your Message
+
+      </label>
+
+      <textarea
+
+        [(ngModel)]="userMessage"
+
+        rows="6"
+
+        class="w-full border border-[#D6C6B8] bg-[#FCFAF8] rounded-xl p-4 text-sm sm:text-base text-[#3E2F2B]
+               focus:outline-none focus:ring-2 focus:ring-[#C6A97E]
+               transition resize-none"
+
+        placeholder="Write your complaint here...">
+
+      </textarea>
+
+    </div>
+
+    <!-- CTA Button -->
+    <button
+
+      routerLink="/home"
+
+      (click)="sendMessage()"
+
+      class="w-full mt-2 bg-[#3E2F2B]
+             text-white font-medium
+             py-3 rounded-xl
+             hover:bg-[#2B211D]
+             transition-all duration-300
+             tracking-wide">
+
+      Submit Complaint
+
+    </button>
+
+    <!-- Success Message -->
+    <p
+      *ngIf="successMessage"
+      class="mt-4 text-center text-sm text-[#8B5E3C] font-medium">
+
+      {{ successMessage }}
+
+    </p>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
