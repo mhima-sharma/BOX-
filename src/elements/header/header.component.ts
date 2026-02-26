@@ -7,6 +7,7 @@ import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../../app/service/cart.service';
 import { AuthService } from '../../app/auth.service';
 import { Subscription } from 'rxjs';
+import { ThemeService } from '../../app/service/theme.service';
 
 // ✅ Optional: Create a CartItem interface if not already declared
 interface CartItem {
@@ -34,13 +35,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isHeaderBlack = false;
   cartCount = 0;
   private cartSubscription!: Subscription;
+  private themeSubscription!: Subscription;
   private userId: number | null = null;
+  isDarkTheme = false;
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.loadCartCount(this.userId!);
       });
     }
+
+    this.isDarkTheme = this.themeService.getCurrentTheme() === 'dark';
+    this.themeSubscription = this.themeService.currentTheme$.subscribe((theme) => {
+      this.isDarkTheme = theme === 'dark';
+    });
   }
 
   loadCartCount(userId: number): void {
@@ -122,9 +131,16 @@ showDevelopmentMessage(): void {
     this.closeMoreMenu();
   }
 
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
   ngOnDestroy(): void {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
+    }
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
     }
   }
 }

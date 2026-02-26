@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
 
 import { SeoService } from './seo.service';
+import { ThemeService } from './service/theme.service';
 
 declare let gtag: Function;
 
@@ -21,10 +22,12 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private seo: SeoService
+    private seo: SeoService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
+    this.themeService.initTheme();
 
     this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))

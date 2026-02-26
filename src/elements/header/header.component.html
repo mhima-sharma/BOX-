@@ -1,5 +1,5 @@
 <!-- TOP BAR -->
-<div class="w-full text-[10px] sm:text-[11px] bg-[#E6D2C4] text-[#3E2F2B]">
+<div class="w-full text-[10px] sm:text-[11px] theme-topbar">
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2 flex justify-between items-center">
 
     <!-- LEFT SOCIAL -->
@@ -13,7 +13,7 @@
     target="_blank"
     aria-label="Instagram">
 
-    <i class="fab fa-instagram cursor-pointer hover:text-[#C6A76E] transition"></i>
+    <i class="fab fa-instagram cursor-pointer theme-hover transition"></i>
 
   </a>
 
@@ -24,7 +24,7 @@
     target="_blank"
     aria-label="Facebook">
 
-    <i class="fab fa-facebook cursor-pointer hover:text-[#C6A76E] transition"></i>
+    <i class="fab fa-facebook cursor-pointer theme-hover transition"></i>
 
   </a>
 
@@ -35,7 +35,7 @@
     target="_blank"
     aria-label="Twitter">
 
-    <i class="fab fa-twitter cursor-pointer hover:text-[#C6A76E] transition"></i>
+    <i class="fab fa-twitter cursor-pointer theme-hover transition"></i>
 
   </a>
 
@@ -45,8 +45,8 @@
 
     <!-- RIGHT LINKS -->
     <div class="hidden sm:flex gap-6 tracking-[0.25em] uppercase text-[10px]">
-      <a routerLink="/intro" class="hover:text-[#C6A76E] transition">About</a>
-      <a routerLink="/contact" class="hover:text-[#C6A76E] transition">Contact</a>
+      <a routerLink="/intro" class="theme-hover transition">About</a>
+      <a routerLink="/contact" class="theme-hover transition">Contact</a>
     </div>
 
   </div>
@@ -54,13 +54,13 @@
 
 
 <!-- MAIN HEADER -->
-<header class="w-full bg-[#D8BFAE] border-b border-[#EADFD6] relative z-40">
+<header class="w-full theme-navbar relative z-40">
 
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
 
     <!-- MOBILE MENU BUTTON -->
     <button
-      class="sm:hidden text-[#3E2F2B] text-xl"
+      class="sm:hidden text-xl"
       (click)="isMenuOpen = !isMenuOpen">
 
       <i class="fas fa-bars"></i>
@@ -69,13 +69,13 @@
 
 
     <!-- LEFT DESKTOP NAV -->
-    <div class="hidden sm:flex gap-10 text-xs tracking-[0.35em] uppercase text-[#3E2F2B]">
+    <div class="hidden sm:flex gap-10 text-xs tracking-[0.35em] uppercase">
 
-      <a routerLink="/show" class="hover:text-[#C6A76E] transition duration-300">
+      <a routerLink="/show" class="theme-hover transition duration-300">
         Home
       </a>
 
-      <a routerLink="/store" class="hover:text-[#C6A76E] transition duration-300">
+      <a routerLink="/store" class="theme-hover transition duration-300">
         Shop
       </a>
 
@@ -87,7 +87,7 @@
 
       <a
         routerLink="/"
-        class="text-2xl sm:text-3xl tracking-[0.5em] text-[#F6F1EB] font-[Playfair_Display]">
+        class="text-2xl sm:text-3xl tracking-[0.5em] font-[Playfair_Display] theme-logo">
 
         BOXÉ
 
@@ -97,13 +97,25 @@
 
 
     <!-- RIGHT ICONS -->
-    <div class="flex items-center gap-5 sm:gap-8 text-sm text-[#3E2F2B]">
+    <div class="flex items-center gap-5 sm:gap-8 text-sm">
+
+      <!-- THEME TOGGLE -->
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'">
+
+        <i *ngIf="isDarkTheme" class="fas fa-sun"></i>
+        <i *ngIf="!isDarkTheme" class="fas fa-moon"></i>
+
+      </button>
 
 
       <!-- CART -->
-      <a routerLink="/show-cart">
+      <a routerLink="/show-cart" class="theme-hover transition">
 
-        <i class="fas fa-shopping-bag cursor-pointer hover:text-[#C6A76E] transition"></i>
+        <i class="fas fa-shopping-bag cursor-pointer"></i>
 
       </a>
 
@@ -113,7 +125,7 @@
 
         <button
           (click)="openLogoutPopup()"
-          class="uppercase text-[10px] tracking-[0.25em] hover:text-[#C6A76E] transition">
+          class="uppercase text-[10px] tracking-[0.25em] theme-hover transition">
 
           Logout
 
@@ -125,7 +137,7 @@
       <ng-template #loginIcon>
 
         <i
-          class="fas fa-user cursor-pointer hover:text-[#C6A76E] transition"
+          class="fas fa-user cursor-pointer theme-hover transition"
           routerLink="/user-login">
 
         </i>
@@ -142,21 +154,21 @@
   <!-- MOBILE MENU -->
   <div
     *ngIf="isMenuOpen"
-    class="sm:hidden bg-[#EADFD6] border-t border-[#D8BFAE] px-6 py-4 space-y-4 text-sm tracking-[0.3em] uppercase text-[#3E2F2B]">
+    class="sm:hidden theme-navbar theme-menu px-6 py-4 space-y-4 text-sm tracking-[0.3em] uppercase">
 
-    <a routerLink="/show" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">
+    <a routerLink="/show" class="block theme-hover" (click)="isMenuOpen=false">
       Home
     </a>
 
-    <a routerLink="/store" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">
+    <a routerLink="/store" class="block theme-hover" (click)="isMenuOpen=false">
       Shop
     </a>
 
-    <a routerLink="/intro" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">
+    <a routerLink="/intro" class="block theme-hover" (click)="isMenuOpen=false">
       About
     </a>
 
-    <a routerLink="/contact" class="block hover:text-[#C6A76E]" (click)="isMenuOpen=false">
+    <a routerLink="/contact" class="block theme-hover" (click)="isMenuOpen=false">
       Contact
     </a>
 
@@ -167,7 +179,7 @@
 
       <button
         (click)="openLogoutPopup()"
-        class="block w-full text-left hover:text-[#C6A76E]">
+        class="block w-full text-left theme-hover">
 
         Logout
 
@@ -180,7 +192,7 @@
 
       <a
         routerLink="/user-login"
-        class="block hover:text-[#C6A76E]"
+        class="block theme-hover"
         (click)="isMenuOpen=false">
 
         Login
@@ -201,16 +213,16 @@
   *ngIf="showLogoutModal"
   class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
-  <div class="bg-[#F6F1EB] rounded-lg w-[90%] max-w-sm p-6 text-center shadow-xl">
+  <div class="theme-card rounded-lg w-[90%] max-w-sm p-6 text-center">
 
-    <h3 class="text-lg font-semibold text-[#3E2F2B] mb-2">
+    <h3 class="text-lg font-semibold mb-2">
 
       Confirm Logout
 
     </h3>
 
 
-    <p class="text-sm text-[#6B5A54] mb-6">
+    <p class="text-sm theme-text-muted mb-6">
 
       Are you sure you want to logout?
 
@@ -221,7 +233,7 @@
 
       <button
         (click)="closeLogoutPopup()"
-        class="px-4 py-2 text-xs uppercase tracking-wider border border-[#3E2F2B] text-[#3E2F2B] hover:bg-[#3E2F2B] hover:text-white transition">
+        class="px-4 py-2 text-xs uppercase tracking-wider theme-btn-outline transition">
 
         Cancel
 
@@ -230,7 +242,7 @@
 
       <button
         (click)="confirmLogout()"
-        class="px-4 py-2 text-xs uppercase tracking-wider bg-[#3E2F2B] text-white hover:opacity-90 transition">
+        class="px-4 py-2 text-xs uppercase tracking-wider theme-btn transition">
 
         Logout
 
