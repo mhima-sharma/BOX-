@@ -1,24 +1,35 @@
 <!-- ================= PROMO / HERO ================= -->
+
 <section class="relative bg-[#F6F1EB] py-10 px-5 overflow-hidden">
 
   <div class="absolute top-0 left-0 w-40 h-40 bg-[#E8D9C8]/30 rounded-full blur-3xl"></div>
+
   <div class="absolute bottom-0 right-0 w-40 h-40 bg-[#D8BFAE]/30 rounded-full blur-3xl"></div>
+
 
   <div class="relative z-10 max-w-4xl mx-auto text-center">
 
     <div
       class="inline-block mb-3 px-3 py-1 border border-[#C6A76E] text-[#8B7355] text-[9px] tracking-[0.28em] uppercase rounded-full bg-[#FDFBF8]">
+
       Exclusive 10% Checkout Privilege
+
     </div>
+
 
     <h1
       class="text-[22px] sm:text-[30px] font-[Playfair_Display] text-[#3E2F2B] tracking-[0.08em] mb-2">
+
       Curated Luxury Gifts
+
     </h1>
+
 
     <p
       class="max-w-lg mx-auto text-[13px] text-[#7B6A58] leading-relaxed">
+
       A refined selection of premium gifts curated for timeless elegance.
+
     </p>
 
   </div>
@@ -26,9 +37,8 @@
 </section>
 
 
-<!-- ================= CATEGORY WISE PRODUCTS ================= -->
 
-<!-- ================= CATEGORY SECTION ================= -->
+<!-- ================= CATEGORY PRODUCTS ================= -->
 
 <section
   class="mt-14 space-y-16 px-4 sm:px-6 lg:px-8"
@@ -36,118 +46,126 @@
 >
 
 
-  <!-- TOP HEADER WITH VIEW ALL -->
+  <!-- Header -->
 
   <div class="flex items-center justify-between mb-6">
 
     <h2
-      class="text-lg sm:text-xl font-[Playfair_Display] text-[#3E2F2B] tracking-wide"
-    >
+      class="text-lg sm:text-xl font-[Playfair_Display] text-[#3E2F2B] tracking-wide">
+
       All Categories
+
     </h2>
 
 
     <span
-      
-      class="text-xs text-[#A68C74] tracking-wider cursor-pointer hover:text-[#3E2F2B]"
-    >
-      View All →
-    </span>
+      routerLink="/viewall"
+      class="text-xs text-[#A68C74] tracking-wider cursor-pointer hover:text-[#3E2F2B]">
 
+      View All →
+
+    </span>
 
   </div>
 
 
 
-  <!-- CATEGORY LOOP -->
+  <!-- Category Loop -->
 
   <div *ngFor="let category of categories">
 
 
+    <!-- IMPORTANT CONDITION -->
 
-    <!-- Category Heading -->
-
-    <h3
-      class="text-md sm:text-lg font-[Playfair_Display] text-[#3E2F2B] mb-4"
-    >
-      {{ category }}
-    </h3>
+    <ng-container *ngIf="getProductsByCategory(category) as categoryProducts">
 
 
+      <ng-container *ngIf="categoryProducts.length > 0">
 
 
-    <!-- Products -->
+        <!-- Category Heading -->
 
-    <div class="flex gap-5 overflow-x-auto pb-3 scrollbar-hide">
+        <h3
+          class="text-md sm:text-lg font-[Playfair_Display] text-[#3E2F2B] mb-4">
 
+          {{ category }}
 
-
-      <!-- CARD -->
-
-      <div
-        *ngFor="let product of filteredProducts | categoryFilter: category"
-        class="min-w-[180px] sm:min-w-[220px] max-w-[220px] h-[240px] bg-white rounded-lg shadow hover:shadow-lg transition flex-shrink-0 flex flex-col"
-      >
+        </h3>
 
 
 
-        <!-- Image -->
+        <!-- Product List -->
 
-        <div
-          class="h-36 sm:h-44 bg-[#F9F7F3] flex items-center justify-center rounded-t-lg overflow-hidden"
-        >
+        <div class="flex gap-5 overflow-x-auto pb-3 scrollbar-hide">
 
-          <img
-            [src]="product.images?.split(',')[0] || 'assets/placeholder.jpg'"
-            class="max-h-full object-contain hover:scale-105 transition duration-500"
-          />
+
+          <!-- Product Card -->
+
+          <div
+            *ngFor="let product of categoryProducts"
+            class="min-w-[180px] sm:min-w-[220px] max-w-[220px] h-[240px] bg-white rounded-lg shadow hover:shadow-lg transition flex-shrink-0 flex flex-col"
+          >
+
+
+            <!-- Image -->
+
+            <div
+              class="h-36 sm:h-44 bg-[#F9F7F3] flex items-center justify-center rounded-t-lg overflow-hidden">
+
+              <img
+                [src]="product.images?.split(',')[0] || 'assets/placeholder.jpg'"
+                class="max-h-full object-contain hover:scale-105 transition duration-500"
+              />
+
+            </div>
+
+
+
+            <!-- Info -->
+
+            <div class="p-3 flex flex-col flex-1">
+
+
+              <h3
+                class="text-xs sm:text-sm font-medium text-[#3E2F2B] line-clamp-2 min-h-[32px]">
+
+                {{ product.title }}
+
+              </h3>
+
+
+
+              <p class="text-[#C6A76E] font-semibold mt-1 text-sm">
+
+                ₹{{ product.price }}
+
+              </p>
+
+
+
+              <button
+                (click)="viewDetails(product.id)"
+                class="mt-auto w-full text-[10px] border border-[#C6A76E] py-1 rounded hover:bg-[#C6A76E] hover:text-white transition">
+
+                View
+
+              </button>
+
+
+            </div>
+
+          </div>
+
 
         </div>
 
 
 
-        <!-- Info -->
+      </ng-container>
 
-        <div class="p-3 flex flex-col flex-1">
-
-
-          <h3
-            class="text-xs sm:text-sm font-medium text-[#3E2F2B] line-clamp-2 min-h-[32px]"
-          >
-
-            {{ product.title }}
-
-          </h3>
-
-
-          <p class="text-[#C6A76E] font-semibold mt-1 text-sm">
-
-            ₹{{ product.price }}
-
-          </p>
-
-
-          <button
-            (click)="viewDetails(product.id)"
-            class="mt-auto w-full text-[10px] border border-[#C6A76E] py-1 rounded hover:bg-[#C6A76E] hover:text-white transition"
-          >
-            View
-          </button>
-
-
-        </div>
-
-
-      </div>
-
-
-
-    </div>
-
-
+    </ng-container>
 
   </div>
-
 
 
 </section>

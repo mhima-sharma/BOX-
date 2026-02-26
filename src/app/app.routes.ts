@@ -20,6 +20,7 @@ import { AdminSidebarComponent } from '../admin/admin-sidebar/admin-sidebar.comp
 import { ManageProductsComponent } from '../admin/manage-products/manage-products.component';
 import { AllOrdersComponent } from '../admin/all-orders/all-orders.component';
 import { BoxeBlogComponent } from '../elements/boxe-blog/boxe-blog.component';
+import { ViewAllComponent } from '../elements/all-product/view-all/view-all.component';
 
 
 export const routes: Routes = [
@@ -147,6 +148,14 @@ export const routes: Routes = [
         data: {
             title: 'Showcase | BOXÉ',
             description: 'Explore featured showcases and highlights.'
+        }
+    },
+     {
+        path: 'viewall',
+        component: ViewAllComponent,
+        data: {
+            title: 'All products | BOXÉ',
+            description: 'Explore all products available in BOXÉ.'
         }
     },
 
