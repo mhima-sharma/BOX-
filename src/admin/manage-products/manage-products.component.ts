@@ -3,12 +3,12 @@ import { Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../app/auth.service';
-import { AdminSidebarComponent } from "../admin-sidebar/admin-sidebar.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminSidebarComponent } from "../admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-manage-products',
-  imports: [ CommonModule, HttpClientModule, AdminSidebarComponent,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, AdminSidebarComponent],
   templateUrl: './manage-products.component.html',
   styleUrl: './manage-products.component.css'
 })
