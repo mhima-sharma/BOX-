@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../app/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminSidebarComponent } from "../admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-manage-products',
-  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule, AdminSidebarComponent],
+  standalone: true, 
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './manage-products.component.html',
   styleUrl: './manage-products.component.css'
 })

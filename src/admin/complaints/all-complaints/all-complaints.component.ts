@@ -6,6 +6,7 @@ import { FooterComponent } from "../../../elements/footer/footer.component";
 
 @Component({
   selector: 'app-all-complaints',
+   standalone: true, 
   imports: [CommonModule, HeaderComponent, FooterComponent],
   templateUrl: './all-complaints.component.html',
   styleUrl: './all-complaints.component.css'

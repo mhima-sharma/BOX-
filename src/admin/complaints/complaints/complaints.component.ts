@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-complaints',
+   standalone: true, 
   imports: [CommonModule],
   templateUrl: './complaints.component.html'
 })

@@ -8,6 +8,7 @@ import { FooterComponent } from "../../../elements/footer/footer.component";
 
 @Component({
   selector: 'app-complaint-box',
+   standalone: true, 
   imports: [CommonModule, FormsModule, RouterLink, HeaderComponent, FooterComponent],
   templateUrl: './complaint-box.component.html',
   styleUrl: './complaint-box.component.css'

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AdminSidebarComponent } from "../admin-sidebar/admin-sidebar.component";
 
 
 @Component({
   selector: 'app-all-orders',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent],
+  imports: [CommonModule],
   templateUrl: './all-orders.component.html'
 })
 export class AllOrdersComponent implements OnInit {

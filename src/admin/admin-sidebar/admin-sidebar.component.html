@@ -1,71 +1,117 @@
 <div class="min-h-screen bg-[#F6F1EB] flex flex-col">
 
-  <!-- Navbar -->
-  <header class="bg-[#F9F5F0] border-b border-[#E1D7CD] shadow-sm">
-
+  <!-- HEADER -->
+  <header class="bg-[#F9F5F0] border-b border-[#E1D7CD] shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
 
-      <h1 class="text-lg font-bold text-[#8B5E3C]">
+      <!-- Title -->
+      <h1 class="text-lg md:text-xl font-semibold tracking-wide text-[#8B5E3C]">
         Admin Panel
       </h1>
 
-      <!-- Menu -->
-      <nav class="flex gap-6 text-sm font-medium">
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex gap-8 text-sm font-medium">
 
         <button
           (click)="showComponent('dashboard')"
-          class="hover:text-[#C6A76E]">
-
+          [ngClass]="selectedComponent === 'dashboard' ? 'text-[#C6A76E]' : 'text-[#5E4634]'"
+          class="transition hover:text-[#C6A76E]">
           Dashboard
-
         </button>
 
         <button
           (click)="showComponent('products')"
-          class="hover:text-[#C6A76E]">
-
+          [ngClass]="selectedComponent === 'products' ? 'text-[#C6A76E]' : 'text-[#5E4634]'"
+          class="transition hover:text-[#C6A76E]">
           Products
-
         </button>
 
         <button
           (click)="showComponent('orders')"
-          class="hover:text-[#C6A76E]">
-
+          [ngClass]="selectedComponent === 'orders' ? 'text-[#C6A76E]' : 'text-[#5E4634]'"
+          class="transition hover:text-[#C6A76E]">
           Orders
-
         </button>
 
         <button
           (click)="showComponent('add-product')"
-          class="hover:text-[#C6A76E]">
-
+          [ngClass]="selectedComponent === 'add-product' ? 'text-[#C6A76E]' : 'text-[#5E4634]'"
+          class="transition hover:text-[#C6A76E]">
           Add Product
-
         </button>
 
       </nav>
+
+      <!-- Mobile Hamburger -->
+      <button 
+        class="md:hidden text-[#8B5E3C]"
+        (click)="mobileMenuOpen = !mobileMenuOpen">
+
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div *ngIf="mobileMenuOpen" 
+         class="md:hidden bg-[#F9F5F0] border-t border-[#E1D7CD] px-4 py-4 space-y-4 text-sm font-medium">
+
+      <button
+        (click)="showComponent('dashboard'); mobileMenuOpen=false"
+        class="block w-full text-left"
+        [ngClass]="selectedComponent === 'dashboard' ? 'text-[#C6A76E]' : 'text-[#5E4634]'">
+        Dashboard
+      </button>
+
+      <button
+        (click)="showComponent('products'); mobileMenuOpen=false"
+        class="block w-full text-left"
+        [ngClass]="selectedComponent === 'products' ? 'text-[#C6A76E]' : 'text-[#5E4634]'">
+        Products
+      </button>
+
+      <button
+        (click)="showComponent('orders'); mobileMenuOpen=false"
+        class="block w-full text-left"
+        [ngClass]="selectedComponent === 'orders' ? 'text-[#C6A76E]' : 'text-[#5E4634]'">
+        Orders
+      </button>
+
+      <button
+        (click)="showComponent('add-product'); mobileMenuOpen=false"
+        class="block w-full text-left"
+        [ngClass]="selectedComponent === 'add-product' ? 'text-[#C6A76E]' : 'text-[#5E4634]'">
+        Add Product
+      </button>
 
     </div>
 
   </header>
 
-
-  <!-- Dynamic Component Load -->
+  <!-- MAIN CONTENT -->
   <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
 
+    <app-admin-dashboard
+      *ngIf="selectedComponent === 'dashboard'">
+    </app-admin-dashboard>
 
-    <app-admin-dashboard *ngIf="selectedComponent === 'dashboard'"></app-admin-dashboard>
+    <app-manage-products
+      *ngIf="selectedComponent === 'products'">
+    </app-manage-products>
 
+    <app-all-orders
+      *ngIf="selectedComponent === 'orders'">
+    </app-all-orders>
 
-    <app-manage-products *ngIf="selectedComponent === 'products'"></app-manage-products>
-
-
-    <app-all-orders *ngIf="selectedComponent === 'orders'"></app-all-orders>
-
-
-    <app-createproduct *ngIf="selectedComponent === 'add-product'"></app-createproduct>
-
+    <app-createproduct
+      *ngIf="selectedComponent === 'add-product'">
+    </app-createproduct>
 
   </main>
 

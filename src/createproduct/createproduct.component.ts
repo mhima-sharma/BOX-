@@ -3,12 +3,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../app/service/product.service';
-import { AdminSidebarComponent } from "../admin/admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,  AdminSidebarComponent],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-admin',
+  standalone: true, 
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login-admin.component.html',
   styleUrls: ['./login-admin.component.css']
@@ -27,6 +28,7 @@ export class LoginAdminComponent {
   }
 
   onLogin() {
+     console.log('BUTTON CLICKED'); 
     if (this.loginForm.invalid) return;
 
     const { email, password } = this.loginForm.value;
@@ -34,8 +36,10 @@ export class LoginAdminComponent {
 
     this.authService.loginAdmin({ email, password }).subscribe({
       next: (res) => {
+         console.log('LOGIN SUCCESS');
         localStorage.setItem('token', res.token); // ✅ optional: save token
         this.loading = false;
+        console.log('FORCE NAVIGATION');
         this.router.navigate(['/admin']);
       },
       error: (err) => {
