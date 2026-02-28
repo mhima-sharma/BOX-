@@ -1,19 +1,19 @@
-<div class="min-h-screen bg-[#F6F1EB] pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen from-[#F6F1EB] to-[#EFE7DE] pt-24 pb-20 px-4 sm:px-8">
 
   <div class="max-w-7xl mx-auto">
 
     <!-- Header -->
-    <div class="mb-10">
+    <div class="mb-14 text-center sm:text-left">
 
-      <h2 class="text-2xl sm:text-3xl font-[Playfair_Display] text-[#3E2F2B]">
+      <h2 class="text-3xl sm:text-4xl font-[Playfair_Display] text-[#3E2F2B] tracking-wide">
         Complaints Management
       </h2>
 
-      <p class="text-sm text-[#8B7355] mt-2">
-        Manage and resolve customer concerns
+      <p class="text-sm sm:text-base text-[#8B7355] mt-3">
+        Manage and resolve customer concerns with care
       </p>
 
-      <div class="w-16 h-[2px] bg-[#C6A769] mt-4"></div>
+      <div class="w-20  from-[#C6A769] to-transparent mt-6 mx-auto sm:mx-0"></div>
 
     </div>
 
@@ -21,111 +21,92 @@
     <!-- Complaints Grid -->
     <div
       *ngIf="complaints.length > 0; else emptyState"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
     >
-
 
       <!-- Complaint Card -->
       <div
         *ngFor="let complaint of complaints"
-        class="bg-white border border-[#E8DFD6] rounded-xl p-6 transition duration-300 hover:shadow-lg hover:-translate-y-1"
+        class="bg-white/80 backdrop-blur-sm border border-[#E8DFD6] rounded-2xl p-7
+               shadow-sm hover:shadow-xl
+               transition-all duration-300 hover:-translate-y-2"
       >
 
-
         <!-- Header -->
-        <div class="flex justify-between items-start mb-4">
+        <div class="flex justify-between items-start mb-5">
 
-
-          <span class="text-xs tracking-wide text-[#8B7355] font-medium">
+          <span class="text-xs tracking-[0.2em] text-[#8B7355] font-semibold">
             COMPLAINT #{{ complaint.id }}
           </span>
-
 
           <span
             class="text-xs px-3 py-1 rounded-full font-medium tracking-wide"
 
             [ngClass]="complaint.status === 'resolved'
               ? 'bg-[#E8E2D8] text-[#3E2F2B]'
-              : 'bg-[#F3ECE4] text-[#8B7355]'"
+              : 'bg-[#FDF8F3] text-[#8B7355] border border-[#EADFD3]'"
           >
             {{ complaint.status | titlecase }}
           </span>
-
 
         </div>
 
 
         <!-- Message -->
-        <p class="text-sm text-[#5C4A3E] leading-relaxed mb-6 min-h-[60px]">
-
+        <p class="text-sm sm:text-base text-[#5C4A3E] leading-relaxed mb-8 line-clamp-4">
           {{ complaint.user_message }}
-
         </p>
 
 
-
         <!-- Footer -->
-        <div class="flex justify-between items-center border-t border-[#EFE7DE] pt-4">
-
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-t border-[#EFE7DE] pt-5">
 
           <span class="text-xs text-[#A38E7A]">
-
             {{ complaint.timestamp | date:'mediumDate' }}
-
           </span>
-
 
 
           <!-- Premium Resolve Button -->
           <button
-
             *ngIf="complaint.status === 'pending'"
-
             (click)="markResolved(complaint.id)"
-
-            class="text-xs px-4 py-2 border border-[#C6A769]
+            class="text-xs px-5 py-2 border border-[#C6A769]
                    text-[#3E2F2B]
                    rounded-lg
                    hover:bg-[#C6A769]
                    hover:text-white
-                   transition duration-300
-                   font-medium tracking-wide"
+                   transition-all duration-300
+                   font-semibold tracking-wide
+                   w-full sm:w-auto"
           >
-
             Mark Resolved
-
           </button>
-
 
 
           <!-- Resolved Label -->
           <span
             *ngIf="complaint.status === 'resolved'"
-            class="text-[10px] tracking-widest text-[#C6A769] font-semibold"
+            class="text-[10px] tracking-[0.3em] text-[#C6A769] font-bold"
           >
             RESOLVED
           </span>
-
 
         </div>
 
       </div>
 
-
     </div>
-
 
 
     <!-- Empty State -->
     <ng-template #emptyState>
 
-      <div class="flex flex-col items-center justify-center py-20">
+      <div class="flex flex-col items-center justify-center py-28 text-center">
 
-
-        <div class="w-16 h-16 bg-[#EFE7DE] rounded-full flex items-center justify-center mb-4">
+        <div class="w-20 h-20 bg-[#EFE7DE] rounded-full flex items-center justify-center mb-6 shadow-inner">
 
           <svg
-            class="w-6 h-6 text-[#8B7355]"
+            class="w-7 h-7 text-[#8B7355]"
             fill="none"
             stroke="currentColor"
             stroke-width="1.5"
@@ -137,21 +118,17 @@
 
         </div>
 
-
-        <h3 class="text-lg font-[Playfair_Display] text-[#3E2F2B]">
+        <h3 class="text-xl font-[Playfair_Display] text-[#3E2F2B]">
           No Complaints Found
         </h3>
 
-
-        <p class="text-sm text-[#8B7355] mt-1">
+        <p class="text-sm text-[#8B7355] mt-2">
           Complaints will appear here once submitted
         </p>
-
 
       </div>
 
     </ng-template>
-
 
   </div>
 

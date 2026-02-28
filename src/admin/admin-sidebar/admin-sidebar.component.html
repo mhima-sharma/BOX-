@@ -40,6 +40,13 @@
           Add Product
         </button>
 
+        <button
+          (click)="showComponent('complaint')"
+          [ngClass]="selectedComponent === 'complaint' ? 'text-[#C6A76E]' : 'text-[#5E4634]'"
+          class="transition hover:text-[#C6A76E]">
+          All Complaints
+        </button>
+
       </nav>
 
       <!-- Mobile Hamburger -->
@@ -90,6 +97,13 @@
         Add Product
       </button>
 
+       <button
+        (click)="showComponent('complaint'); mobileMenuOpen=false"
+        class="block w-full text-left"
+        [ngClass]="selectedComponent === 'complaint' ? 'text-[#C6A76E]' : 'text-[#5E4634]'">
+        All Complaints
+      </button>
+
     </div>
 
   </header>
@@ -112,6 +126,9 @@
     <app-createproduct
       *ngIf="selectedComponent === 'add-product'">
     </app-createproduct>
+    <app-complaints
+      *ngIf="selectedComponent === 'complaint'">
+    </app-complaints>
 
   </main>
 

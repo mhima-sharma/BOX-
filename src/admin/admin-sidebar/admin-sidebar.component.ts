@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from "../admin-dashboard/admin-dashboard.comp
 import { ManageProductsComponent } from "../manage-products/manage-products.component";
 import { AllOrdersComponent } from "../all-orders/all-orders.component";
 import { CreateproductComponent } from "../../createproduct/createproduct.component";
+import { ComplaintsComponent } from "../complaints/complaints/complaints.component";
 
 
 
@@ -16,7 +17,8 @@ import { CreateproductComponent } from "../../createproduct/createproduct.compon
     AdminDashboardComponent,
     ManageProductsComponent,
     AllOrdersComponent,
-    CreateproductComponent
+    CreateproductComponent,
+    ComplaintsComponent
 ],
   templateUrl: './admin-sidebar.component.html'
 })
